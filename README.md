@@ -1,4 +1,4 @@
-video-walls
+videoWallsUsersRouter
 ==================
 
 This opensource project will help people to seamlessly have multiple video chat in there own server.
