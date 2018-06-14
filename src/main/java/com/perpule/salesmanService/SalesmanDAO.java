@@ -2,13 +2,15 @@ package com.perpule.salesmanService;
 
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
+import org.apache.log4j.Logger;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class salesmanDAO {
+public class SalesmanDAO {
 
     private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
         PreparedStatement preparedStatement = DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);
@@ -21,7 +23,7 @@ public class salesmanDAO {
         return statement.executeQuery(sqlQuery);
     }
 
-    public SalesmanDatabaseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException {
+    public SalesmanDatabaseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
         String id = RandomAndHashStringUtil.getId(salesmanSignInSignUpRequestModel.getUserName(),createdAt);
         String userName = salesmanSignInSignUpRequestModel.getUserName();
@@ -45,8 +47,7 @@ public class salesmanDAO {
                 authToken
         );
 
-        String sqlQuery = "INSERT INTO 'salesman' ('id', 'userName','randomString','hashedPassword', 'role', 'isActive','isOccupied', 'createdAt','lastSignedIn','authToken') VALUES ('"+id+"','"+userName+"','"+randomString+"','"+hashedPassword+"','"+role+"',"+isActive+","+isOccupied+",'"+createdAt+"','"+lastSignedIn+"','"+authToken+"')";
-
+        String sqlQuery = "INSERT INTO salesman (id , userName , randomString , hashedPassword , role , isActive , isOccupied , createdAt , lastSignedIn , authToken ) VALUES ( '"+id+"' , '"+userName+"' , '"+randomString+"' , '"+hashedPassword+"' , '"+role+"' , "+isActive+" , "+ isOccupied + " , '"+createdAt+"' , '"+lastSignedIn+"' , '"+authToken+"' )";
         if (doQuery(sqlQuery)){
             return salesmanDatabaseModel;
         }else{
@@ -54,7 +55,12 @@ public class salesmanDAO {
         }
     }
 
-//    public boolean isSalesmanUsernameExists(String userName){
-//
-//    }
+    public boolean isSalesmanUsernameExists(String userName) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+userName+"'";
+        if (!getResultset(sqlQuery).isBeforeFirst()){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

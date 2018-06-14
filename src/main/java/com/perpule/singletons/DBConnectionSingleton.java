@@ -11,7 +11,7 @@ public class DBConnectionSingleton {
     private Connection connection;
 
     public DBConnectionSingleton() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(DBConstant.getDBURL(),DBConstant.getDBUsername(),DBConstant.getDBPassword());
     }
     public Connection getConnection(){
