@@ -3,9 +3,7 @@ Video Walls Users Router
 
 This opensource project will help people to seamlessly have multiple video chat in there own server.
 
-* Build `gradle build --info`
-
-* Run `java -jar jetty-runner-9.1.0.M0.jar --port 9000 build/libs/videoWallsUsersRouter.war`
+* Build and run `gradle build --info && java -jar jetty-runner-9.4.11.v20180605.jar --port 9000 build/libs/videoWallsUsersRouter.war`
 
 * [API Docs](https://documenter.getpostman.com/view/4519932/RWEdtLJN)
 
