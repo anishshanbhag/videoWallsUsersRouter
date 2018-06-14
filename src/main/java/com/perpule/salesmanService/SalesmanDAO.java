@@ -55,6 +55,63 @@ public class SalesmanDAO {
         }
     }
 
+    public boolean isSalemanUserExists(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+salesmanSignInSignUpRequestModel.getUserName()+"'";
+        ResultSet resultSet = getResultset(sqlQuery);
+        if (resultSet.isBeforeFirst()){
+            resultSet.next();
+            if (resultSet.getString("hashedPassword").equals(RandomAndHashStringUtil.hashPassword(salesmanSignInSignUpRequestModel.getPassword(), resultSet.getString("randomString")))){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    public SalesmanDatabaseModel getSalemanUserData(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+salesmanSignInSignUpRequestModel.getUserName()+"'";
+        String id = null;
+        String userName = null;
+        String randomString = null;
+        String hashedPassword = null;
+        String role = null;
+        boolean isActive = false;
+        boolean isOccupied = false;
+        String createdAt = null;
+        String lastSignedIn = null;
+        String authToken = null;
+        ResultSet resultSet = getResultset(sqlQuery);
+        if (resultSet.isBeforeFirst()) {
+            resultSet.next();
+            id = resultSet.getString("id");
+            userName = resultSet.getString("userName");
+            randomString = resultSet.getString("randomString");
+            hashedPassword = resultSet.getString("hashedPassword");
+            role = resultSet.getString("role");
+            isActive = resultSet.getBoolean("isActive");
+            isOccupied = resultSet.getBoolean("isOccupied");
+            createdAt = resultSet.getString("createdAt");
+            lastSignedIn = resultSet.getString("lastSignedIn");
+            authToken = resultSet.getString("authToken");
+        }
+        SalesmanDatabaseModel salesmanDatabaseModel = new SalesmanDatabaseModel(
+                id,
+                userName,
+                randomString,
+                hashedPassword,
+                role,
+                isActive,
+                isOccupied,
+                createdAt,
+                lastSignedIn,
+                authToken
+        );
+        return salesmanDatabaseModel;
+    }
+
+
     public boolean isSalesmanUsernameExists(String userName) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+userName+"'";
         if (!getResultset(sqlQuery).isBeforeFirst()){

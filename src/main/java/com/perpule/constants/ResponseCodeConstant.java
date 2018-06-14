@@ -7,5 +7,9 @@ public class ResponseCodeConstant {
     public static final int USERNAME_AND_PASSWORD_DID_NOT_MATCH = 108402;
     public static final int USERNAME_AVAILABLE = 108201;
     public static final int USERNAME_NOT_AVAILABLE = 108403;
-    public static final int USERNAME_ = 108404;
+    public static final int AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED = 108404;
+    public static final int AUTH_TOKEN_FOUND_OR_MATCHED = 108202;
+    public static final int BODY_CONTAINS_NULL_OR_UNDEFINED_ELEMENTS = 108405;
+
+
 }

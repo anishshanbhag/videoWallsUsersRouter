@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.perpule.constants.ResponseCodeConstant;
 import com.perpule.models.ResponseModel;
 import com.perpule.salesmanService.SalesmanDAO;
+import com.perpule.salesmanService.SalesmanDatabaseModel;
 import com.perpule.salesmanService.SalesmanSignInSignUpRequestModel;
 import jdk.nashorn.internal.runtime.logging.Logger;
 
@@ -24,8 +25,13 @@ public class SalesmanResource {
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG),null);
-        responseModel.setData(new Gson().toJson(salesmanDAO.createSalesman(salesmanSignInSignUpRequestModel)));
-        responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+        if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())){
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
+        }else{
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+
+            responseModel.setData(new Gson().toJson(salesmanDAO.createSalesman(salesmanSignInSignUpRequestModel)));
+        }
         return responseModel;
     }
     @Path("checkSalesmanUserNameExist")
@@ -35,9 +41,24 @@ public class SalesmanResource {
     public ResponseModel checkSalesmanUserNameExist(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG),null);
         if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())){
-            org.apache.log4j.Logger.getLogger(getClass()).info("true username exist");
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
         }else{
-            org.apache.log4j.Logger.getLogger(getClass()).info("false username doesn't exist");
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_AVAILABLE));
+        }
+        return responseModel;
+    }
+    @Path("checkSalesmanUser")
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseModel checkSalesmanUser(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG),null);
+        if (salesmanDAO.isSalemanUserExists(salesmanSignInSignUpRequestModel)){
+            SalesmanDatabaseModel salesmanDatabaseModel = salesmanDAO.getSalemanUserData(salesmanSignInSignUpRequestModel);
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+            responseModel.setData(new Gson().toJson(salesmanDatabaseModel));
+        }else{
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_FOUND));
         }
         return responseModel;
     }
