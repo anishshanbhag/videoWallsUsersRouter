@@ -1,6 +1,7 @@
 package com.perpule.salesmanService;
 
 import com.perpule.singletons.DBConnectionSingleton;
+import com.perpule.utils.RandomAndHashStringUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,8 +21,40 @@ public class salesmanDAO {
         return statement.executeQuery(sqlQuery);
     }
 
-    public boolean createSalesman(){
+    public SalesmanDatabaseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException {
+        String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
+        String id = RandomAndHashStringUtil.getId(salesmanSignInSignUpRequestModel.getUserName(),createdAt);
+        String userName = salesmanSignInSignUpRequestModel.getUserName();
+        String randomString = RandomAndHashStringUtil.randomString(31);
+        String hashedPassword = RandomAndHashStringUtil.hashPassword(salesmanSignInSignUpRequestModel.getPassword(),randomString);
+        String role = SalesmanDatabaseModel.SALESMAN_ROLE;
+        boolean isActive = false;
+        boolean isOccupied = false;
+        String lastSignedIn = createdAt;
+        String authToken = RandomAndHashStringUtil.randomString(31);
+        SalesmanDatabaseModel salesmanDatabaseModel = new SalesmanDatabaseModel(
+                id,
+                userName,
+                randomString,
+                hashedPassword,
+                role,
+                isActive,
+                isOccupied,
+                createdAt,
+                lastSignedIn,
+                authToken
+        );
 
+        String sqlQuery = "INSERT INTO 'salesman' ('id', 'userName','randomString','hashedPassword', 'role', 'isActive','isOccupied', 'createdAt','lastSignedIn','authToken') VALUES ('"+id+"','"+userName+"','"+randomString+"','"+hashedPassword+"','"+role+"',"+isActive+","+isOccupied+",'"+createdAt+"','"+lastSignedIn+"','"+authToken+"')";
+
+        if (doQuery(sqlQuery)){
+            return salesmanDatabaseModel;
+        }else{
+            throw new Error("doQuery function not working!");
+        }
     }
 
+//    public boolean isSalesmanUsernameExists(String userName){
+//
+//    }
 }
