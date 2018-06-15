@@ -128,4 +128,22 @@ public class SalesmanDAO {
             return true;
         }
     }
+    public boolean setActive(String authToken) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "UPDATE salesman SET isActive = "+true+" WHERE authToken = '"+authToken+"'";
+        Logger.getLogger(getClass()).info(sqlQuery);
+        if (doQuery(sqlQuery)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public boolean unSetActive(String authToken) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "UPDATE salesman SET isActive = "+false+" WHERE authToken = '"+authToken+"'";
+        Logger.getLogger(getClass()).info(sqlQuery);
+        if (doQuery(sqlQuery)){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
