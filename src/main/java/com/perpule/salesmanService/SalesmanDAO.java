@@ -120,4 +120,12 @@ public class SalesmanDAO {
             return true;
         }
     }
+    public boolean isAuthTokenExists(String authToken) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "SELECT * FROM salesman WHERE authToken = '"+authToken+"'";
+        if (!getResultset(sqlQuery).isBeforeFirst()){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
