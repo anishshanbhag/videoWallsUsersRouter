@@ -60,11 +60,7 @@ public class SalesmanDAO {
         ResultSet resultSet = getResultset(sqlQuery);
         if (resultSet.isBeforeFirst()){
             resultSet.next();
-            if (resultSet.getString("hashedPassword").equals(RandomAndHashStringUtil.hashPassword(salesmanSignInSignUpRequestModel.getPassword(), resultSet.getString("randomString")))){
-                return true;
-            }else{
-                return false;
-            }
+            return resultSet.getString("hashedPassword").equals(RandomAndHashStringUtil.hashPassword(salesmanSignInSignUpRequestModel.getPassword(), resultSet.getString("randomString")));
         }else{
             return false;
         }
@@ -111,39 +107,25 @@ public class SalesmanDAO {
         return salesmanDatabaseModel;
     }
 
-
     public boolean isSalesmanUsernameExists(String userName) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+userName+"'";
-        if (!getResultset(sqlQuery).isBeforeFirst()){
-            return false;
-        }else {
-            return true;
-        }
+        return getResultset(sqlQuery).isBeforeFirst();
     }
+
     public boolean isAuthTokenExists(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM salesman WHERE authToken = '"+authToken+"'";
-        if (!getResultset(sqlQuery).isBeforeFirst()){
-            return false;
-        }else {
-            return true;
-        }
+        return getResultset(sqlQuery).isBeforeFirst();
     }
+
     public boolean setActive(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "UPDATE salesman SET isActive = "+true+" WHERE authToken = '"+authToken+"'";
         Logger.getLogger(getClass()).info(sqlQuery);
-        if (doQuery(sqlQuery)){
-            return true;
-        }else {
-            return false;
-        }
+        return doQuery(sqlQuery);
     }
+
     public boolean unSetActive(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "UPDATE salesman SET isActive = "+false+" WHERE authToken = '"+authToken+"'";
-        Logger.getLogger(getClass()).info(sqlQuery);
-        if (doQuery(sqlQuery)){
-            return true;
-        }else {
-            return false;
-        }
+        return doQuery(sqlQuery);
     }
+
 }

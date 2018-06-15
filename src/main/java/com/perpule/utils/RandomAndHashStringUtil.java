@@ -3,6 +3,9 @@ package com.perpule.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class RandomAndHashStringUtil {
 
@@ -33,5 +36,8 @@ public class RandomAndHashStringUtil {
             sb.append(String.format("%02x", b & 0xff));
         }
         return sb.toString();
+    }
+    public static String getProductStringTags(String string){
+        return string;
     }
 }
