@@ -18,7 +18,7 @@ public class DBConstant {
     }
     public static String getDBPassword(){
         if (IS_DEV){
-            return "ishan";
+            return null;
         }else{
             return "";
         }
