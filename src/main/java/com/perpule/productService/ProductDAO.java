@@ -52,6 +52,7 @@ public class ProductDAO {
             throw new Error("doQuery function not working!");
         }
     }
+
     public ArrayList<ProductDatabaseModel> getSearchedProduct(String queryString) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM product WHERE productStringTags LIKE '%"+queryString+"%' LIMIT 100";
         ArrayList<ProductDatabaseModel> list = new ArrayList<>();
