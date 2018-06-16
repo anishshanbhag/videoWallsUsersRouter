@@ -2,22 +2,22 @@ package com.perpule.productSalesmanService;
 
 public class ProductSalesmanDatabaseRequestModel {
 
-    private String salesManId;
-    private String productid;
+    private String salesmanId;
+    private String productId;
 
-    public String getSalesManId() {
-        return salesManId;
+    public String getSalesmanId() {
+        return salesmanId;
     }
 
-    public void setSalesManId(String salesManId) {
-        this.salesManId = salesManId;
+    public void setSalesmanId(String salesmanId) {
+        this.salesmanId = salesmanId;
     }
 
-    public String getProductid() {
-        return productid;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProductid(String productid) {
-        this.productid = productid;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }

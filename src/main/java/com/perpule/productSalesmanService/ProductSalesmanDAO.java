@@ -1,9 +1,6 @@
 package com.perpule.productSalesmanService;
 
-import com.perpule.productService.ProductCreateRequestModel;
-import com.perpule.productService.ProductDatabaseModel;
 import com.perpule.singletons.DBConnectionSingleton;
-import com.perpule.utils.RandomAndHashStringUtil;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -11,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class productSalesmanDAO {
+public class ProductSalesmanDAO {
 
     private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
         PreparedStatement preparedStatement = DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);
@@ -24,10 +21,10 @@ public class productSalesmanDAO {
         return statement.executeQuery(sqlQuery);
     }
 
-    public ProductDatabaseModel createSalesmanProduct(ProductCreateRequestModel productCreateRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        String sqlQuery = "INSERT INTO product (id , productName , productDetails , productCategory , productStringTags , totalRatings , totalUsersRated , totalHits) VALUES ( '"+id+"' , '"+productName+"' , '"+productDetails+"' , '"+productCategory+"' , '"+productStringTags+"' , "+totalRatings+" , "+totalUsersRated+" , "+totalHits+")";
+    public boolean createSalesmanProduct(ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        String sqlQuery = "INSERT INTO productSalesman (salesmanId , productId ) VALUES ( '"+productSalesmanDatabaseRequestModel.getSalesmanId()+"' , '"+productSalesmanDatabaseRequestModel.getProductId()+"' )";
         if (doQuery(sqlQuery)){
-            return productCreateRequestModel;
+            return true;
         }else{
             throw new Error("doQuery function not working!");
         }
