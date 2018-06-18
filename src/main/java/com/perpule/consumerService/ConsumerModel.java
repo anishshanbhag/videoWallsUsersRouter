@@ -3,7 +3,7 @@ package com.perpule.consumerService;
 public class ConsumerModel {
     private String id;
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
     private int createdAt;
     private String deviceId;
 
@@ -31,11 +31,11 @@ public class ConsumerModel {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -27,7 +27,7 @@ public class ConsumerDAO {
         String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
         String id = RandomAndHashStringUtil.getId(consumerModel.getDeviceId(),createdAt);
         String name = consumerModel.getName();
-        int phoneNumber = consumerModel.getPhoneNumber();
+        String phoneNumber = consumerModel.getPhoneNumber();
         String deviceId  = consumerModel.getDeviceId();
         String sqlQuery = "INSERT INTO consumer (id , name , phoneNumber, createdAt, deviceId ) VALUES ( '"+id+"' , '"+name+"' , "+phoneNumber+" , "+createdAt+" , '"+deviceId+"')";
         if (doQuery(sqlQuery)){
