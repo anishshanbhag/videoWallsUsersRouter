@@ -2,8 +2,17 @@ package com.perpule.productSalesmanService;
 
 public class ProductSalesmanDatabaseRequestModel {
 
+    private String id;
     private String salesmanId;
     private String productId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSalesmanId() {
         return salesmanId;

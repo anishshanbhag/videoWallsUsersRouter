@@ -2,6 +2,7 @@ package com.perpule.productSalesmanService;
 
 import com.perpule.productService.ProductDatabaseModel;
 import com.perpule.singletons.DBConnectionSingleton;
+import com.perpule.utils.RandomAndHashStringUtil;
 import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
@@ -25,7 +26,8 @@ public class ProductSalesmanDAO {
     }
 
     public boolean createSalesmanProduct(ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        String sqlQuery = "INSERT INTO productSalesman (salesmanId , productId ) VALUES ( '"+productSalesmanDatabaseRequestModel.getSalesmanId()+"' , '"+productSalesmanDatabaseRequestModel.getProductId()+"' )";
+        String id =RandomAndHashStringUtil.getId(productSalesmanDatabaseRequestModel.getSalesmanId(), productSalesmanDatabaseRequestModel.getProductId());
+        String sqlQuery = "INSERT INTO productSalesman (id ,salesmanId , productId ) VALUES ( '"+id+"','"+productSalesmanDatabaseRequestModel.getSalesmanId()+"' , '"+productSalesmanDatabaseRequestModel.getProductId()+"' )";
         if (doQuery(sqlQuery)){
             return true;
         }else{
@@ -51,6 +53,7 @@ public class ProductSalesmanDAO {
         if (resultSet.isBeforeFirst()){
             while(resultSet.next()){
                 ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel1= new ProductSalesmanDatabaseRequestModel();
+                productSalesmanDatabaseRequestModel.setId(resultSet.getString("id"));
                 productSalesmanDatabaseRequestModel1.setSalesmanId(productSalesmanDatabaseRequestModel.getSalesmanId());
                 productSalesmanDatabaseRequestModel1.setProductId(resultSet.getString("productId"));
                 list.add(productSalesmanDatabaseRequestModel1);
