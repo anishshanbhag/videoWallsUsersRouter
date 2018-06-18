@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2018 at 05:01 PM
+-- Generation Time: Jun 18, 2018 at 05:24 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -77,6 +77,7 @@ INSERT INTO `product` (`id`, `productName`, `productDetails`, `productCategory`,
 --
 
 CREATE TABLE `productSalesman` (
+  `id` varchar(63) NOT NULL,
   `salesmanId` varchar(63) NOT NULL,
   `productId` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -85,10 +86,8 @@ CREATE TABLE `productSalesman` (
 -- Dumping data for table `productSalesman`
 --
 
-INSERT INTO `productSalesman` (`salesmanId`, `productId`) VALUES
-('74af7fc1c163ca34c65c5893993d6b58', 'a6e62837d3a9541055026dab789d381f'),
-('74af7fc1c163ca34c65c5893993d6b58', 'ab2aa351ad030b5c0c5781645c65cdad'),
-('74af7fc1c163ca34c65c5893993d6b58', '2ddb5959e140743c12a7a281159c6b7f');
+INSERT INTO `productSalesman` (`id`, `salesmanId`, `productId`) VALUES
+('d0866e5152ebcd4bb1b1e9d46dbb45fd', '74af7fc1c163ca34c65c5893993d6b58', '2ddb5959e140743c12a7a281159c6b7f');
 
 -- --------------------------------------------------------
 
@@ -114,7 +113,6 @@ CREATE TABLE `salesman` (
 --
 
 INSERT INTO `salesman` (`id`, `userName`, `randomString`, `hashedPassword`, `role`, `isActive`, `isOccupied`, `createdAt`, `lastSignedIn`, `authToken`) VALUES
-('2c7a8c6b7721b39c79391e0b623031dc', '', 'CqgLaJSxvwUnNrQZuYk9mqm5yfZDO60', 'a711da0543d7efc54d91e437848b7843', 'salesman', 0, 0, 1529125961, 1529125961, '2711ukiriH7U2o6xtbWoJ6pmOp4qtdS'),
 ('74af7fc1c163ca34c65c5893993d6b58', 'joeydash', '6pc5hsaZgdiRd8mlDbsB5C1czDdQMVR', '959cbc8a1c3266f0fb177cae68b71a84', 'salesman', 0, 0, 1528972632, 1528972632, '7oiCkZpLwEwo4VkNZsAhp9Ilklfzg8N');
 
 --
@@ -131,6 +129,12 @@ ALTER TABLE `consumer`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `productSalesman`
+--
+ALTER TABLE `productSalesman`
   ADD PRIMARY KEY (`id`);
 
 --
