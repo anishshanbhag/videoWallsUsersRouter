@@ -33,6 +33,15 @@ public class ProductSalesmanDAO {
         }
     }
 
+    public boolean removeSalesmanProduct(ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        String sqlQuery = "DELETE FROM productSalesman WHERE salesmanId = '"+productSalesmanDatabaseRequestModel.getSalesmanId()+"' AND productId = '"+productSalesmanDatabaseRequestModel.getProductId()+"'";
+        if (doQuery(sqlQuery)){
+            return true;
+        }else{
+            throw new Error("doQuery function not working!");
+        }
+    }
+
     public ArrayList<ProductSalesmanDatabaseRequestModel> getAllProductSalesmanMapping(ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel) throws SQLException, ClassNotFoundException {
         ArrayList<ProductSalesmanDatabaseRequestModel> list = new ArrayList<>();
 
