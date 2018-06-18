@@ -1,12 +1,15 @@
 package com.perpule.productSalesmanService;
 
+import com.perpule.productService.ProductDatabaseModel;
 import com.perpule.singletons.DBConnectionSingleton;
+import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ProductSalesmanDAO {
 
@@ -25,6 +28,56 @@ public class ProductSalesmanDAO {
         String sqlQuery = "INSERT INTO productSalesman (salesmanId , productId ) VALUES ( '"+productSalesmanDatabaseRequestModel.getSalesmanId()+"' , '"+productSalesmanDatabaseRequestModel.getProductId()+"' )";
         if (doQuery(sqlQuery)){
             return true;
+        }else{
+            throw new Error("doQuery function not working!");
+        }
+    }
+
+    public ArrayList<ProductSalesmanDatabaseRequestModel> getAllProductSalesmanMapping(ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel) throws SQLException, ClassNotFoundException {
+        ArrayList<ProductSalesmanDatabaseRequestModel> list = new ArrayList<>();
+
+        String sqlQuery = "SELECT * FROM productSalesman WHERE salesmanId = '"+productSalesmanDatabaseRequestModel.getSalesmanId()+"'";
+        Logger.getLogger(getClass()).info(sqlQuery);
+        ResultSet resultSet = getResultset(sqlQuery);
+        if (resultSet.isBeforeFirst()){
+            while(resultSet.next()){
+                ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel1= new ProductSalesmanDatabaseRequestModel();
+                productSalesmanDatabaseRequestModel1.setSalesmanId(productSalesmanDatabaseRequestModel.getSalesmanId());
+                productSalesmanDatabaseRequestModel1.setProductId(resultSet.getString("productId"));
+                list.add(productSalesmanDatabaseRequestModel1);
+            }
+            return list;
+        }else{
+            throw new Error("doQuery function not working!");
+        }
+    }
+    public ArrayList<ProductDatabaseModel> getAllProductsRegisteredByUser(ArrayList<ProductSalesmanDatabaseRequestModel> list) throws SQLException, ClassNotFoundException {
+        ArrayList<ProductDatabaseModel> list1 = new ArrayList<>();
+        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM product WHERE id IN (");
+        for (int i = 0; i < list.size(); i ++){
+            sqlQuery.append("'").append(list.get(i).getProductId()).append("'");
+            if ( i != list.size() - 1 ){
+                sqlQuery.append(",");
+            }
+        }
+        sqlQuery.append(")");
+        Logger.getLogger(getClass()).info(sqlQuery.toString());
+        ResultSet resultSet = getResultset(sqlQuery.toString());
+        if (resultSet.isBeforeFirst()){
+            while(resultSet.next()){
+                ProductDatabaseModel productDatabaseModel = new ProductDatabaseModel(
+                        resultSet.getString("id"),
+                        resultSet.getString("productName"),
+                        resultSet.getString("productDetails"),
+                        resultSet.getString("productCategory"),
+                        resultSet.getString("productStringTags"),
+                        resultSet.getFloat("totalRatings"),
+                        resultSet.getInt("totalUsersRated"),
+                        resultSet.getInt("totalHits")
+                );
+                list1.add(productDatabaseModel);
+            }
+            return list1;
         }else{
             throw new Error("doQuery function not working!");
         }
