@@ -7,7 +7,6 @@ import com.perpule.productService.ProductCreateRequestModel;
 import com.perpule.productService.ProductDAO;
 import com.perpule.productService.SearchProductRequestModel;
 import com.perpule.salesmanService.SalesmanDAO;
-import com.perpule.salesmanService.SalesmanSignInSignUpRequestModel;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -45,7 +44,7 @@ public class ProductResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel searchProduct(SearchProductRequestModel searchProductRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    public ResponseModel searchProduct(SearchProductRequestModel searchProductRequestModel) throws SQLException, ClassNotFoundException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
         responseModel.setData(new Gson().toJson(productDAO.getSearchedProduct(searchProductRequestModel.getQueryString())));

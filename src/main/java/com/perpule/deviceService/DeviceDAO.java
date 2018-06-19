@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 
 public class DeviceDAO {
 
@@ -27,24 +26,24 @@ public class DeviceDAO {
     public DeviceResponseDatabaseModel createDevice(DeviceResponseDatabaseModel deviceResponseDatabaseModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
         deviceResponseDatabaseModel.setCreatedAt(createdAt);
-        String id = RandomAndHashStringUtil.getId(deviceResponseDatabaseModel.getDeviceFingerprint(),createdAt);
+        String id = RandomAndHashStringUtil.getId(deviceResponseDatabaseModel.getDeviceFingerprint(), createdAt);
         deviceResponseDatabaseModel.setId(id);
-        String salesmanId  = deviceResponseDatabaseModel.getSalesmanId();
+        String salesmanId = deviceResponseDatabaseModel.getSalesmanId();
         String deviceFingerprint = deviceResponseDatabaseModel.getDeviceFingerprint();
-        boolean isVerified  = true;
-        String sqlQuery = "INSERT INTO device (id , deviceFingerprint , isVerified , createdAt , salesmanId) VALUES ( '"+id+"' , '"+deviceFingerprint+"' , "+isVerified+" , '"+createdAt+"' , '"+salesmanId+"')";
-        if (doQuery(sqlQuery)){
+        boolean isVerified = true;
+        String sqlQuery = "INSERT INTO device (id , deviceFingerprint , isVerified , createdAt , salesmanId) VALUES ( '" + id + "' , '" + deviceFingerprint + "' , " + isVerified + " , '" + createdAt + "' , '" + salesmanId + "')";
+        if (doQuery(sqlQuery)) {
             return deviceResponseDatabaseModel;
-        }else{
+        } else {
             throw new Error("doQuery function not working!");
         }
     }
 
     public boolean deleteDevice(String id) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        String sqlQuery = "DELETE FROM device WHERE id = '"+id+"'";
-        if (doQuery(sqlQuery)){
+        String sqlQuery = "DELETE FROM device WHERE id = '" + id + "'";
+        if (doQuery(sqlQuery)) {
             return true;
-        }else{
+        } else {
             throw new Error("doQuery function not working!");
         }
     }

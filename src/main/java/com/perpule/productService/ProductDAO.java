@@ -1,7 +1,5 @@
 package com.perpule.productService;
 
-import com.perpule.salesmanService.SalesmanDatabaseModel;
-import com.perpule.salesmanService.SalesmanSignInSignUpRequestModel;
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
 
@@ -31,7 +29,7 @@ public class ProductDAO {
         String productName = productCreateRequestModel.getProductName();
         String productDetails = productCreateRequestModel.getProductDetails();
         String productCategory = productCreateRequestModel.getProductCategory();
-        String productStringTags = RandomAndHashStringUtil.getProductStringTags(productName+" "+productDetails+" "+productCategory);
+        String productStringTags = RandomAndHashStringUtil.getProductStringTags(productName + " " + productDetails + " " + productCategory);
         int totalRatings = 0;
         int totalUsersRated = 0;
         int totalHits = 0;
@@ -45,19 +43,19 @@ public class ProductDAO {
                 totalUsersRated,
                 totalHits
         );
-        String sqlQuery = "INSERT INTO product (id , productName , productDetails , productCategory , productStringTags , totalRatings , totalUsersRated , totalHits) VALUES ( '"+id+"' , '"+productName+"' , '"+productDetails+"' , '"+productCategory+"' , '"+productStringTags+"' , "+totalRatings+" , "+totalUsersRated+" , "+totalHits+")";
-        if (doQuery(sqlQuery)){
+        String sqlQuery = "INSERT INTO product (id , productName , productDetails , productCategory , productStringTags , totalRatings , totalUsersRated , totalHits) VALUES ( '" + id + "' , '" + productName + "' , '" + productDetails + "' , '" + productCategory + "' , '" + productStringTags + "' , " + totalRatings + " , " + totalUsersRated + " , " + totalHits + ")";
+        if (doQuery(sqlQuery)) {
             return productDatabaseModel;
-        }else{
+        } else {
             throw new Error("doQuery function not working!");
         }
     }
 
     public ArrayList<ProductDatabaseModel> getSearchedProduct(String queryString) throws SQLException, ClassNotFoundException {
-        String sqlQuery = "SELECT * FROM product WHERE productStringTags LIKE '%"+queryString+"%' LIMIT 100";
+        String sqlQuery = "SELECT * FROM product WHERE productStringTags LIKE '%" + queryString + "%' LIMIT 100";
         ArrayList<ProductDatabaseModel> list = new ArrayList<>();
         ResultSet resultSet = getResultset(sqlQuery);
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String id = resultSet.getString("id");
             String productName = resultSet.getString("productName");
             String productDetails = resultSet.getString("productDetails");

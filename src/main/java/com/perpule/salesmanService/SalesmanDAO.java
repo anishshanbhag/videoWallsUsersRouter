@@ -114,7 +114,6 @@ public class SalesmanDAO {
 
     public boolean isSalesmanManager(String salesmanId) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM salesman WHERE id = '"+salesmanId+"' AND role = 'manager'";
-        Logger.getLogger(getClass()).info(sqlQuery);
         return getResultset(sqlQuery).isBeforeFirst();
     }
 

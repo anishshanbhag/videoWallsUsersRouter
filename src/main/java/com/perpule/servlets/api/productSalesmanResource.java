@@ -5,7 +5,6 @@ import com.perpule.constants.ResponseCodeConstant;
 import com.perpule.models.ResponseModel;
 import com.perpule.productSalesmanService.ProductSalesmanDAO;
 import com.perpule.productSalesmanService.ProductSalesmanDatabaseRequestModel;
-import com.perpule.productService.ProductCreateRequestModel;
 import com.perpule.salesmanService.SalesmanDAO;
 
 import javax.ws.rs.Consumes;

@@ -3,30 +3,31 @@ package com.perpule.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 public class RandomAndHashStringUtil {
 
     private final static String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static SecureRandom rnd = new SecureRandom();
 
-    public static String randomString( int len ){
-        StringBuilder sb = new StringBuilder( len );
-        for( int i = 0; i < len; i++ )
-            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+    public static String randomString(int len) {
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
-    public static String getId(String string,String time) throws NoSuchAlgorithmException {
+
+    public static String getId(String string, String time) throws NoSuchAlgorithmException {
         return hashString(string + time);
     }
+
     public static String jumblePasswordWithRandomString(String password, String random_string) {
-        return password+random_string;
+        return password + random_string;
     }
+
     public static String hashPassword(String password, String random_string) throws NoSuchAlgorithmException {
-        return hashString(jumblePasswordWithRandomString(password,random_string));
+        return hashString(jumblePasswordWithRandomString(password, random_string));
     }
+
     public static String hashString(String string) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(string.getBytes());
@@ -37,7 +38,8 @@ public class RandomAndHashStringUtil {
         }
         return sb.toString();
     }
-    public static String getProductStringTags(String string){
+
+    public static String getProductStringTags(String string) {
         return string;
     }
 }

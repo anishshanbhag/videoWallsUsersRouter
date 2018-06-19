@@ -1,7 +1,5 @@
 package com.perpule.consumerService;
 
-import com.perpule.salesmanService.SalesmanDatabaseModel;
-import com.perpule.salesmanService.SalesmanSignInSignUpRequestModel;
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
 
@@ -25,14 +23,14 @@ public class ConsumerDAO {
 
     public ConsumerModel createConsumer(ConsumerModel consumerModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
-        String id = RandomAndHashStringUtil.getId(consumerModel.getDeviceId(),createdAt);
+        String id = RandomAndHashStringUtil.getId(consumerModel.getDeviceId(), createdAt);
         String name = consumerModel.getName();
         String phoneNumber = consumerModel.getPhoneNumber();
-        String deviceId  = consumerModel.getDeviceId();
-        String sqlQuery = "INSERT INTO consumer (id , name , phoneNumber, createdAt, deviceId ) VALUES ( '"+id+"' , '"+name+"' , "+phoneNumber+" , "+createdAt+" , '"+deviceId+"')";
-        if (doQuery(sqlQuery)){
+        String deviceId = consumerModel.getDeviceId();
+        String sqlQuery = "INSERT INTO consumer (id , name , phoneNumber, createdAt, deviceId ) VALUES ( '" + id + "' , '" + name + "' , " + phoneNumber + " , " + createdAt + " , '" + deviceId + "')";
+        if (doQuery(sqlQuery)) {
             return consumerModel;
-        }else{
+        } else {
             throw new Error("doQuery function not working!");
         }
     }

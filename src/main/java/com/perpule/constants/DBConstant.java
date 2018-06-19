@@ -1,25 +1,28 @@
 package com.perpule.constants;
 
 public class DBConstant {
-    public static boolean IS_DEV = true;
-    public static String getDBURL(){
-        if (IS_DEV){
+    private static boolean IS_DEV = true;
+
+    public static String getDBURL() {
+        if (IS_DEV) {
             return "jdbc:mysql://localhost/videoWalls";
-        }else{
+        } else {
             return "";
         }
     }
-    public static String getDBUsername(){
-        if (IS_DEV){
+
+    public static String getDBUsername() {
+        if (IS_DEV) {
             return "root";
-        }else{
+        } else {
             return "";
         }
     }
-    public static String getDBPassword(){
-        if (IS_DEV){
+
+    public static String getDBPassword() {
+        if (IS_DEV) {
             return "ishan";
-        }else{
+        } else {
             return "";
         }
     }

@@ -6,7 +6,6 @@ import com.perpule.models.ResponseModel;
 import com.perpule.salesmanService.SalesmanDAO;
 import com.perpule.salesmanService.SalesmanDatabaseModel;
 import com.perpule.salesmanService.SalesmanSignInSignUpRequestModel;
-import jdk.nashorn.internal.runtime.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

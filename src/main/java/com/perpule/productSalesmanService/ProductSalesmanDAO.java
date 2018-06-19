@@ -3,7 +3,6 @@ package com.perpule.productSalesmanService;
 import com.perpule.productService.ProductDatabaseModel;
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
-import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;

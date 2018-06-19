@@ -7,23 +7,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnectionSingleton {
-    private static DBConnectionSingleton  dbConnectionSingleton = null;
+    private static DBConnectionSingleton dbConnectionSingleton = null;
     private Connection connection;
 
     public DBConnectionSingleton() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(DBConstant.getDBURL(),DBConstant.getDBUsername(),DBConstant.getDBPassword());
-    }
-    public Connection getConnection(){
-        return connection;
+        connection = DriverManager.getConnection(DBConstant.getDBURL(), DBConstant.getDBUsername(), DBConstant.getDBPassword());
     }
 
     public static DBConnectionSingleton getInstance() throws SQLException, ClassNotFoundException {
-        if (dbConnectionSingleton == null){
+        if (dbConnectionSingleton == null) {
             return new DBConnectionSingleton();
-        }else{
+        } else {
             return dbConnectionSingleton;
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
 }

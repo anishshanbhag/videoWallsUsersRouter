@@ -27,11 +27,10 @@ public class DeviceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseModel registerNewDevice(DeviceResponseDatabaseModel deviceResponseDatabaseModel) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())){
-            Logger.getLogger(String.valueOf(getClass())).info("OKAY");
+        if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
             responseModel.setData(new Gson().toJson(deviceDAO.createDevice(deviceResponseDatabaseModel)));
-        }else {
+        } else {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.NOT_A_MANAGER));
         }
         return responseModel;
@@ -43,10 +42,10 @@ public class DeviceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseModel deleteDevice(DeviceResponseDatabaseModel deviceResponseDatabaseModel) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())){
+        if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
             responseModel.setData(new Gson().toJson(deviceDAO.deleteDevice(deviceResponseDatabaseModel.getId())));
-        }else {
+        } else {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.NOT_A_MANAGER));
         }
         return responseModel;

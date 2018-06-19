@@ -10,6 +10,17 @@ public class ProductDatabaseModel {
     private int totalUsersRated;
     private int totalHits;
 
+    public ProductDatabaseModel(String id, String productName, String productDetails, String productCategory, String productStringTags, float totalRatings, int totalUsersRated, int totalHits) {
+        this.id = id;
+        this.productName = productName;
+        this.productDetails = productDetails;
+        this.productCategory = productCategory;
+        this.productStringTags = productStringTags;
+        this.totalRatings = totalRatings;
+        this.totalUsersRated = totalUsersRated;
+        this.totalHits = totalHits;
+    }
+
     public String getId() {
         return id;
     }
@@ -71,17 +82,6 @@ public class ProductDatabaseModel {
     }
 
     public void setTotalHits(int totalHits) {
-        this.totalHits = totalHits;
-    }
-
-    public ProductDatabaseModel(String id, String productName, String productDetails, String productCategory, String productStringTags, float totalRatings, int totalUsersRated, int totalHits) {
-        this.id = id;
-        this.productName = productName;
-        this.productDetails = productDetails;
-        this.productCategory = productCategory;
-        this.productStringTags = productStringTags;
-        this.totalRatings = totalRatings;
-        this.totalUsersRated = totalUsersRated;
         this.totalHits = totalHits;
     }
 }

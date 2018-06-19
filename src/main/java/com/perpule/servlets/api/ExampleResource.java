@@ -1,7 +1,5 @@
-
 package com.perpule.servlets.api;
 
-import com.perpule.singletons.DBConnectionSingleton;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.GET;
