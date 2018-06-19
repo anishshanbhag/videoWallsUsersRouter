@@ -1,7 +1,7 @@
 :boom: :boom: Video Walls Users Router :boom: :boom:
 =
 
-This opensource project will help people to seamlessly connect salesman/designer to consumers 
+This opensource project will help people to seamlessly connect salesmans/designers to consumers 
 * [Download jetty-runner](http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.1.0.M0/jetty-runner-9.4.10.M0.jar)
 
 * Install Gradle first
@@ -19,4 +19,4 @@ This opensource project will help people to seamlessly connect salesman/designer
 ### NB :
 * please follow strict [java coding style](https://github.com/RocketChat/java-code-styles/blob/master/CODING_STYLE.md) while contributing
 
-* For adding features and bug report via GitHub [issue](https://github.com/joeydash/videoWallsUsersRouter/issues) :)
+* Add features and report bug via GitHub [issue](https://github.com/joeydash/videoWallsUsersRouter/issues) :)
