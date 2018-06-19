@@ -5,13 +5,9 @@ import com.perpule.constants.ResponseCodeConstant;
 import com.perpule.models.ResponseModel;
 import com.perpule.productService.ProductCreateRequestModel;
 import com.perpule.productService.ProductDAO;
-import com.perpule.productService.SearchProductRequestModel;
 import com.perpule.salesmanService.SalesmanDAO;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -41,13 +37,12 @@ public class ProductResource {
     }
 
     @Path("searchProduct")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel searchProduct(SearchProductRequestModel searchProductRequestModel) throws SQLException, ClassNotFoundException {
+    @GET
+    public ResponseModel searchProduct(@QueryParam("query") String query) throws SQLException, ClassNotFoundException {
+
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+        responseModel.setData(new Gson().toJson(productDAO.getSearchedProduct(query)));
         responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-        responseModel.setData(new Gson().toJson(productDAO.getSearchedProduct(searchProductRequestModel.getQueryString())));
         return responseModel;
     }
 
