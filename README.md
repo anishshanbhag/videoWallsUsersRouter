@@ -13,4 +13,8 @@ This opensource project will help people to seamlessly have multiple video chat 
 
 * [Response Code](https://docs.google.com/spreadsheets/d/e/2PACX-1vRQBYAwqRdtrRPNgMN4ZeUYUMym8-FeVYYL6zJeYjdwAjQSqQx0roVnCqarF8hSL3pSt8dRo14IkxOE/pubhtml)
 
+* [Database Schema](https://docs.google.com/spreadsheets/d/e/2PACX-1vTLQpOj_NTl8DtybGgoKZNP6KBnLKP7pnIqvQiH3-BvmNVBdFVlEKnHQOB60ldtfgSb9cvOcqiyW4NR/pubhtml)
+
 * We follow strict [java coding rules](https://github.com/RocketChat/java-code-styles/blob/master/CODING_STYLE.md)
+
+* [Tables Images](https://image.ibb.co/n2uZVJ/Whats_App_Image_2018_06_12_at_13_24_17.jpg)
