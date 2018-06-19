@@ -2,7 +2,7 @@
 =
 
 This opensource project will help people to seamlessly connect salesmans/designers to consumers 
-* [Download jetty-runner](http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.1.0.M0/jetty-runner-9.4.10.M0.jar)
+* [Download jetty-runner](https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-runner) and copy it to same folder
 
 * Install Gradle first
  
