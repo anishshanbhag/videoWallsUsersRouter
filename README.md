@@ -16,4 +16,7 @@ This opensource project will help people to seamlessly connect salesman/designer
 
 * [Tables Image](https://image.ibb.co/n2uZVJ/Whats_App_Image_2018_06_12_at_13_24_17.jpg)
 
-* We follow strict [java coding rules](https://github.com/RocketChat/java-code-styles/blob/master/CODING_STYLE.md)
+### NB :
+* please follow strict [java coding style](https://github.com/RocketChat/java-code-styles/blob/master/CODING_STYLE.md) while contributing
+
+* For adding features and bug report via GitHub [issue](https://github.com/joeydash/videoWallsUsersRouter/issues) :)
