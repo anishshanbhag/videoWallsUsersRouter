@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2018 at 05:24 PM
+-- Generation Time: Jun 19, 2018 at 03:34 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -40,6 +40,28 @@ CREATE TABLE `consumer` (
 
 INSERT INTO `consumer` (`id`, `name`, `phoneNumber`, `createdAt`, `deviceId`) VALUES
 ('4e5b9964736b9e948ab7b292d42deb48', 'joeydash', '9435840783', 1529321445, 'sample');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device`
+--
+
+CREATE TABLE `device` (
+  `id` varchar(63) NOT NULL,
+  `deviceFingerprint` varchar(63) NOT NULL,
+  `isVerified` tinyint(1) NOT NULL,
+  `createdAt` int(11) NOT NULL,
+  `salesmanId` varchar(63) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `device`
+--
+
+INSERT INTO `device` (`id`, `deviceFingerprint`, `isVerified`, `createdAt`, `salesmanId`) VALUES
+('3d9ef4721090c957acce664e122c0b04', 'jvgkmjgvmgbm', 0, 1529400404, ''),
+('fecec767ed805ccf4c98b9f4342e8f87', 'jvgkmjgvmgbm', 0, 1529400264, '');
 
 -- --------------------------------------------------------
 
@@ -82,13 +104,6 @@ CREATE TABLE `productSalesman` (
   `productId` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `productSalesman`
---
-
-INSERT INTO `productSalesman` (`id`, `salesmanId`, `productId`) VALUES
-('d0866e5152ebcd4bb1b1e9d46dbb45fd', '74af7fc1c163ca34c65c5893993d6b58', '2ddb5959e140743c12a7a281159c6b7f');
-
 -- --------------------------------------------------------
 
 --
@@ -123,6 +138,12 @@ INSERT INTO `salesman` (`id`, `userName`, `randomString`, `hashedPassword`, `rol
 -- Indexes for table `consumer`
 --
 ALTER TABLE `consumer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `device`
+--
+ALTER TABLE `device`
   ADD PRIMARY KEY (`id`);
 
 --

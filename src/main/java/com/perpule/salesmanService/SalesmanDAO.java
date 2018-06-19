@@ -112,6 +112,12 @@ public class SalesmanDAO {
         return getResultset(sqlQuery).isBeforeFirst();
     }
 
+    public boolean isSalesmanManager(String salesmanId) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "SELECT * FROM salesman WHERE id = '"+salesmanId+"' AND role = 'manager'";
+        Logger.getLogger(getClass()).info(sqlQuery);
+        return getResultset(sqlQuery).isBeforeFirst();
+    }
+
     public boolean isAuthTokenExists(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "SELECT * FROM salesman WHERE authToken = '"+authToken+"'";
         return getResultset(sqlQuery).isBeforeFirst();
@@ -119,7 +125,6 @@ public class SalesmanDAO {
 
     public boolean setActive(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "UPDATE salesman SET isActive = "+true+" WHERE authToken = '"+authToken+"'";
-        Logger.getLogger(getClass()).info(sqlQuery);
         return doQuery(sqlQuery);
     }
 

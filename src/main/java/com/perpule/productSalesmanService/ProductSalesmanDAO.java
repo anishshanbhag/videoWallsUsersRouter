@@ -48,7 +48,6 @@ public class ProductSalesmanDAO {
         ArrayList<ProductSalesmanDatabaseRequestModel> list = new ArrayList<>();
 
         String sqlQuery = "SELECT * FROM productSalesman WHERE salesmanId = '" + productSalesmanDatabaseRequestModel.getSalesmanId() + "'";
-        Logger.getLogger(getClass()).info(sqlQuery);
         ResultSet resultSet = getResultset(sqlQuery);
         if (resultSet.isBeforeFirst()) {
             while (resultSet.next()) {
@@ -74,7 +73,6 @@ public class ProductSalesmanDAO {
             }
         }
         sqlQuery.append(")");
-        Logger.getLogger(getClass()).info(sqlQuery.toString());
         ResultSet resultSet = getResultset(sqlQuery.toString());
         if (resultSet.isBeforeFirst()) {
             while (resultSet.next()) {
