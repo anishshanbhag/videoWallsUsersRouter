@@ -6,6 +6,14 @@ public class ProductSalesmanDatabaseRequestModel {
   private String salesmanId;
   private String productId;
 
+  public ProductSalesmanDatabaseRequestModel() {}
+
+  public ProductSalesmanDatabaseRequestModel(String id, String salesmanId, String productId) {
+    this.id = id;
+    this.salesmanId = salesmanId;
+    this.productId = productId;
+  }
+
   public String getId() {
     return id;
   }

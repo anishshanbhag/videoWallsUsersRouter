@@ -19,6 +19,10 @@ public class RandomAndHashStringUtil {
     return hashString(string + time);
   }
 
+  public static String getId(String string) throws NoSuchAlgorithmException {
+    return hashString(string);
+  }
+
   public static String jumblePasswordWithRandomString(String password, String random_string) {
     return password + random_string;
   }

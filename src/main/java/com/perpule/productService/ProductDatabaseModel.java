@@ -10,6 +10,8 @@ public class ProductDatabaseModel {
   private int totalUsersRated;
   private int totalHits;
 
+  public ProductDatabaseModel() {}
+
   public ProductDatabaseModel(
       String id,
       String productName,

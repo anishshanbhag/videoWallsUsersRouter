@@ -8,6 +8,17 @@ public class DeviceResponseDatabaseModel {
   private String createdAt;
   private String salesmanId;
 
+  public DeviceResponseDatabaseModel() {}
+
+  public DeviceResponseDatabaseModel(
+      String id, String deviceFingerprint, String isVerified, String createdAt, String salesmanId) {
+    this.id = id;
+    this.deviceFingerprint = deviceFingerprint;
+    this.isVerified = isVerified;
+    this.createdAt = createdAt;
+    this.salesmanId = salesmanId;
+  }
+
   public String getId() {
     return id;
   }

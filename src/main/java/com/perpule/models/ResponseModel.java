@@ -5,6 +5,8 @@ public class ResponseModel {
   private String response;
   private String data;
 
+  public ResponseModel() {}
+
   public ResponseModel(String response, String data) {
 
     this.response = response;

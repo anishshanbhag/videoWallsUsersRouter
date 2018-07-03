@@ -27,6 +27,7 @@ public class ConsumerResource {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     responseModel.setData(new Gson().toJson(consumerDAO.createConsumer(consumerModel)));
+    responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
     return responseModel;
   }
 }

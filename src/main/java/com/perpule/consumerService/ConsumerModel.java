@@ -7,6 +7,16 @@ public class ConsumerModel {
   private int createdAt;
   private String deviceId;
 
+  public ConsumerModel() {}
+
+  public ConsumerModel(String id, String name, String phoneNumber, int createdAt, String deviceId) {
+    this.id = id;
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.createdAt = createdAt;
+    this.deviceId = deviceId;
+  }
+
   public String getDeviceId() {
     return deviceId;
   }

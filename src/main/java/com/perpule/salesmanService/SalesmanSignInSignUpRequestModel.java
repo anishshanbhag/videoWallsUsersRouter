@@ -4,6 +4,15 @@ public class SalesmanSignInSignUpRequestModel {
   private String userName;
   private String password;
 
+  public SalesmanSignInSignUpRequestModel() {
+  }
+
+  public SalesmanSignInSignUpRequestModel(String userName, String password) {
+
+    this.userName = userName;
+    this.password = password;
+  }
+
   public String getUserName() {
     return userName;
   }

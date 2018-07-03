@@ -5,6 +5,15 @@ public class ProductCreateRequestModel {
   private String productDetails;
   private String productCategory;
 
+  public ProductCreateRequestModel() {}
+
+  public ProductCreateRequestModel(
+      String productName, String productDetails, String productCategory) {
+    this.productName = productName;
+    this.productDetails = productDetails;
+    this.productCategory = productCategory;
+  }
+
   public String getProductName() {
     return productName;
   }
