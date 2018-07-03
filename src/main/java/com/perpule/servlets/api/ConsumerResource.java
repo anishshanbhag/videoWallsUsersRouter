@@ -16,15 +16,17 @@ import java.sql.SQLException;
 
 @Path("consumer")
 public class ConsumerResource {
-    private ConsumerDAO consumerDAO = new ConsumerDAO();
+  private ConsumerDAO consumerDAO = new ConsumerDAO();
 
-    @Path("createConsumer")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel createConsumer(ConsumerModel consumerModel) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        responseModel.setData(new Gson().toJson(consumerDAO.createConsumer(consumerModel)));
-        return responseModel;
-    }
+  @Path("createConsumer")
+  @POST
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel createConsumer(ConsumerModel consumerModel)
+      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    responseModel.setData(new Gson().toJson(consumerDAO.createConsumer(consumerModel)));
+    return responseModel;
+  }
 }

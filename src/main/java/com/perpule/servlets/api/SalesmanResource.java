@@ -19,128 +19,154 @@ import java.sql.SQLException;
 
 @Path("salesman")
 public class SalesmanResource {
-    private SalesmanDAO salesmanDAO = new SalesmanDAO();
+  private SalesmanDAO salesmanDAO = new SalesmanDAO();
 
-    @Path("createSalesman")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+  @Path("createSalesman")
+  @POST
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel createSalesman(
+      SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel)
+      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
+    } else {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
 
-            responseModel.setData(new Gson().toJson(salesmanDAO.createSalesman(salesmanSignInSignUpRequestModel)));
-        }
-        return responseModel;
+      responseModel.setData(
+          new Gson().toJson(salesmanDAO.createSalesman(salesmanSignInSignUpRequestModel)));
     }
+    return responseModel;
+  }
 
-    @Path("checkSalesmanUserNameExist")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel checkSalesmanUserNameExist(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_AVAILABLE));
-        }
-        return responseModel;
+  @Path("checkSalesmanUserNameExist")
+  @POST
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel checkSalesmanUserNameExist(
+      SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_AVAILABLE));
+    } else {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_AVAILABLE));
     }
+    return responseModel;
+  }
 
-    @Path("checkSalesmanUser")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel checkSalesmanUser(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isSalemanUserExists(salesmanSignInSignUpRequestModel)) {
-            SalesmanDatabaseModel salesmanDatabaseModel = salesmanDAO.getSalemanUserData(salesmanSignInSignUpRequestModel);
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            responseModel.setData(new Gson().toJson(salesmanDatabaseModel));
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_FOUND));
-        }
-        return responseModel;
+  @Path("checkSalesmanUser")
+  @POST
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel checkSalesmanUser(
+      SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel)
+      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isSalemanUserExists(salesmanSignInSignUpRequestModel)) {
+      SalesmanDatabaseModel salesmanDatabaseModel =
+          salesmanDAO.getSalemanUserData(salesmanSignInSignUpRequestModel);
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      responseModel.setData(new Gson().toJson(salesmanDatabaseModel));
+    } else {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.USERNAME_NOT_FOUND));
     }
+    return responseModel;
+  }
 
-    @Path("checkAuthToken")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel checkAuthToken(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
-        }
-        return responseModel;
+  @Path("checkAuthToken")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel checkAuthToken(@Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
     }
+    return responseModel;
+  }
 
-    @Path("setActive")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel setActive(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-            if (salesmanDAO.setActive(httpheaders.getHeaderString("authToken"))) {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            }
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
-        }
-        return responseModel;
+  @Path("setActive")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel setActive(@Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+      if (salesmanDAO.setActive(httpheaders.getHeaderString("authToken"))) {
+        responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      }
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
     }
+    return responseModel;
+  }
 
-    @Path("unSetActive")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel unsetActive(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-            if (salesmanDAO.unSetActive(httpheaders.getHeaderString("authToken"))) {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            }
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
-        }
-        return responseModel;
+  @Path("unSetActive")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel unsetActive(@Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+      if (salesmanDAO.unSetActive(httpheaders.getHeaderString("authToken"))) {
+        responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      }
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
     }
+    return responseModel;
+  }
 
-    @Path("setOccupied")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel setOccupied(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-            if (salesmanDAO.setOccupied(httpheaders.getHeaderString("authToken"))) {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            }
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
-        }
-        return responseModel;
+  @Path("setOccupied")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel setOccupied(@Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+      if (salesmanDAO.setOccupied(httpheaders.getHeaderString("authToken"))) {
+        responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      }
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
     }
+    return responseModel;
+  }
 
-    @Path("unSetOccupied")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel unsetOccupied(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
-        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-            if (salesmanDAO.unSetOccupied(httpheaders.getHeaderString("authToken"))) {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            }
-        } else {
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
-        }
-        return responseModel;
+  @Path("unSetOccupied")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel unsetOccupied(@Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+      if (salesmanDAO.unSetOccupied(httpheaders.getHeaderString("authToken"))) {
+        responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      }
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
     }
+    return responseModel;
+  }
 }

@@ -135,7 +135,7 @@ public class SalesmanDAO {
         return doQuery(sqlQuery);
     }
 
-    public boolean unSetOccupied(String authToken) throws SQLException, ClassNotFoundException {
+  public boolean unSetOccupied(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "UPDATE salesman SET isOccupied = "+false+" WHERE authToken = '"+authToken+"'";
         return doQuery(sqlQuery);
     }

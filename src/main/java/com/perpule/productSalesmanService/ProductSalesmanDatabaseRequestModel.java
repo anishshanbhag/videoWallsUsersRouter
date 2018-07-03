@@ -2,31 +2,31 @@ package com.perpule.productSalesmanService;
 
 public class ProductSalesmanDatabaseRequestModel {
 
-    private String id;
-    private String salesmanId;
-    private String productId;
+  private String id;
+  private String salesmanId;
+  private String productId;
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getSalesmanId() {
-        return salesmanId;
-    }
+  public String getSalesmanId() {
+    return salesmanId;
+  }
 
-    public void setSalesmanId(String salesmanId) {
-        this.salesmanId = salesmanId;
-    }
+  public void setSalesmanId(String salesmanId) {
+    this.salesmanId = salesmanId;
+  }
 
-    public String getProductId() {
-        return productId;
-    }
+  public String getProductId() {
+    return productId;
+  }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
 }

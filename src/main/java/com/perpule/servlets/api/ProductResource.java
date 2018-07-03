@@ -20,12 +20,13 @@ public class ProductResource {
     private ProductDAO productDAO = new ProductDAO();
     private SalesmanDAO salesmanDAO = new SalesmanDAO();
 
-
-    @Path("createProduct")
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseModel createProduct(ProductCreateRequestModel productCreateRequestModel, @Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+  @Path("createProduct")
+  @POST
+  @Consumes({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel createProduct(
+      ProductCreateRequestModel productCreateRequestModel, @Context HttpHeaders httpheaders)
+      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));

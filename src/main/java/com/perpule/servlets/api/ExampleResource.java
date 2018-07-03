@@ -11,14 +11,11 @@ import javax.ws.rs.core.MediaType;
 @Path("example")
 public class ExampleResource {
 
-
-    @Path("{example}")
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String example(@PathParam("example") String example) {
-        Logger.getLogger(getClass()).info("Working???");
-        return example + "!!!!";
-
-    }
-
+  @Path("{example}")
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  public String example(@PathParam("example") String example) {
+    Logger.getLogger(getClass()).info("Working???");
+    return example + "!!!!";
+  }
 }
