@@ -87,12 +87,11 @@ public class SalesmanResource {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-        } else {
             if (salesmanDAO.setActive(httpheaders.getHeaderString("authToken"))) {
                 responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            } else {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
             }
+        } else {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
         }
         return responseModel;
     }
@@ -104,12 +103,43 @@ public class SalesmanResource {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
-        } else {
             if (salesmanDAO.unSetActive(httpheaders.getHeaderString("authToken"))) {
                 responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
-            } else {
-                responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
             }
+        } else {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
+        }
+        return responseModel;
+    }
+
+    @Path("setOccupied")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseModel setOccupied(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+            if (salesmanDAO.setOccupied(httpheaders.getHeaderString("authToken"))) {
+                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+            }
+        } else {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
+        }
+        return responseModel;
+    }
+
+    @Path("unSetOccupied")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseModel unsetOccupied(@Context HttpHeaders httpheaders) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+        ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+        if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
+            if (salesmanDAO.unSetOccupied(httpheaders.getHeaderString("authToken"))) {
+                responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+            }
+        } else {
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
         }
         return responseModel;
     }

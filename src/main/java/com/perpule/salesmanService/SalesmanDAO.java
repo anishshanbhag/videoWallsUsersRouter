@@ -2,7 +2,6 @@ package com.perpule.salesmanService;
 
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
-import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -129,6 +128,15 @@ public class SalesmanDAO {
 
     public boolean unSetActive(String authToken) throws SQLException, ClassNotFoundException {
         String sqlQuery = "UPDATE salesman SET isActive = "+false+" WHERE authToken = '"+authToken+"'";
+        return doQuery(sqlQuery);
+    }
+    public boolean setOccupied(String authToken) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "UPDATE salesman SET isOccupied = "+true+" WHERE authToken = '"+authToken+"'";
+        return doQuery(sqlQuery);
+    }
+
+    public boolean unSetOccupied(String authToken) throws SQLException, ClassNotFoundException {
+        String sqlQuery = "UPDATE salesman SET isOccupied = "+false+" WHERE authToken = '"+authToken+"'";
         return doQuery(sqlQuery);
     }
 

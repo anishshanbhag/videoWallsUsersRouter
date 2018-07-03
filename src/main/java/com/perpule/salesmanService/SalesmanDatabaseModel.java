@@ -16,6 +16,9 @@ public class SalesmanDatabaseModel {
     private String lastSignedIn;
     private String authToken;
 
+    public SalesmanDatabaseModel() {
+    }
+
     public SalesmanDatabaseModel(String id, String userName, String randomString, String hashedPassword, String role, boolean isActive, boolean isOccupied, String createdAt, String lastSignedIn, String authToken) {
         this.id = id;
         this.userName = userName;
