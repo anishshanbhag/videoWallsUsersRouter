@@ -55,4 +55,20 @@ public class roomResource {
     }
     return responseModel;
   }
+
+  @POST
+  @Path("isSalesmanAllotted")
+  @Produces({MediaType.APPLICATION_JSON})
+  @Consumes({MediaType.APPLICATION_JSON})
+  public ResponseModel checkWhetherSalesmanAllotted(RoomDatabaseModel roomDatabaseModel)
+      throws SQLException, ClassNotFoundException {
+        ResponseModel responseModel =
+                new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+        if (roomDAO.isSalesmanAllotted(roomDatabaseModel.getId())){
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_ALLOTTTED_IN_THE_ROOM));
+        }else{
+            responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_STILL_NOT_ALLOTTTED_IN_THE_ROOM));
+        }
+        return responseModel;
+    }
 }

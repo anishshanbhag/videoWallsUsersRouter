@@ -56,9 +56,13 @@ public class RoomDAO {
     ResultSet resultSet = getResultset(sqlQuery);
     if (resultSet.isBeforeFirst()) {
       resultSet.next();
-      return resultSet.getInt("averageWaitingTime");
+      if (resultSet.getInt("averageWaitingTime") == 0) {
+        return 10;
+      } else {
+        return resultSet.getInt("averageWaitingTime");
+      }
     } else {
-      return 60;
+      return 10;
     }
   }
 
@@ -92,5 +96,11 @@ public class RoomDAO {
     } else {
       return roomDatabaseModel;
     }
+  }
+
+  public boolean isSalesmanAllotted(String roomId) throws SQLException, ClassNotFoundException {
+    String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NOT NULL AND id = '" + roomId + "'";
+    ResultSet resultSet = getResultset(sqlQuery);
+    return resultSet.isBeforeFirst();
   }
 }

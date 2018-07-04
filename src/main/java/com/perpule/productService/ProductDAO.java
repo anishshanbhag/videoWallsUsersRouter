@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductDAO {
+
   private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
     PreparedStatement preparedStatement =
         DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);

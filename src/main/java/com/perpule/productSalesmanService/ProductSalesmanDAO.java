@@ -3,6 +3,7 @@ package com.perpule.productSalesmanService;
 import com.perpule.productService.ProductDatabaseModel;
 import com.perpule.singletons.DBConnectionSingleton;
 import com.perpule.utils.RandomAndHashStringUtil;
+import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -85,7 +86,7 @@ public class ProductSalesmanDAO {
       }
       return list;
     } else {
-      throw new Error("doQuery function not working!");
+      return list;
     }
   }
 
@@ -101,6 +102,7 @@ public class ProductSalesmanDAO {
       }
     }
     sqlQuery.append(")");
+    Logger.getLogger(getClass()).info(sqlQuery);
     ResultSet resultSet = getResultset(sqlQuery.toString());
     if (resultSet.isBeforeFirst()) {
       while (resultSet.next()) {
@@ -118,7 +120,7 @@ public class ProductSalesmanDAO {
       }
       return list1;
     } else {
-      throw new Error("doQuery function not working!");
+      return list1;
     }
   }
 }

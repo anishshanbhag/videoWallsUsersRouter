@@ -76,7 +76,7 @@ public class productSalesmanResource {
   public ResponseModel getProductIdSalesmanIdMappingList(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, ClassNotFoundException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -93,24 +93,25 @@ public class productSalesmanResource {
     return responseModel;
   }
 
-  @Path("getSalesmanProductList")
+  @Path("getSalesmanProductDetailList")
   @POST
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel getSalesmanProductList(
+  public ResponseModel getSalesmanProductDetailList(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, ClassNotFoundException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
-      responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.AUTH_TOKEN_FOUND_OR_MATCHED));
       responseModel.setData(
           new Gson()
               .toJson(
                   productSalesmanDAO.getAllProductsRegisteredByUser(
                       productSalesmanDAO.getAllProductSalesmanMapping(
                           productSalesmanDatabaseRequestModel))));
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
     } else {
       responseModel.setResponse(
           String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
