@@ -14,7 +14,7 @@ public class ProductSalesmanDAO {
 
   public boolean createSalesmanProduct(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     String id =
         RandomAndHashStringUtil.getId(
             productSalesmanDatabaseRequestModel.getSalesmanId(),
@@ -36,7 +36,7 @@ public class ProductSalesmanDAO {
 
   public boolean removeSalesmanProduct(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException {
     String sqlQuery =
         "DELETE FROM productSalesman WHERE salesmanId = '"
             + productSalesmanDatabaseRequestModel.getSalesmanId()
@@ -52,7 +52,7 @@ public class ProductSalesmanDAO {
 
   public ArrayList<ProductSalesmanDatabaseRequestModel> getAllProductSalesmanMapping(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ArrayList<ProductSalesmanDatabaseRequestModel> list = new ArrayList<>();
 
     String sqlQuery =
@@ -78,7 +78,7 @@ public class ProductSalesmanDAO {
 
   public ArrayList<ProductDatabaseModel> getAllProductsRegisteredByUser(
       ArrayList<ProductSalesmanDatabaseRequestModel> list)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ArrayList<ProductDatabaseModel> list1 = new ArrayList<>();
     StringBuilder sqlQuery = new StringBuilder("SELECT * FROM product WHERE id IN (");
     for (int i = 0; i < list.size(); i++) {

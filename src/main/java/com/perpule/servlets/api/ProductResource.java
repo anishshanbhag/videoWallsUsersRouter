@@ -26,7 +26,7 @@ public class ProductResource {
   @Produces(MediaType.APPLICATION_JSON)
   public ResponseModel createProduct(
       ProductCreateRequestModel productCreateRequestModel, @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
             responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
@@ -39,7 +39,7 @@ public class ProductResource {
 
     @Path("searchProduct")
     @GET
-    public ResponseModel searchProduct(@QueryParam("query") String query) throws SQLException, ClassNotFoundException {
+    public ResponseModel searchProduct(@QueryParam("query") String query) throws SQLException {
 
         ResponseModel responseModel = new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         responseModel.setData(new Gson().toJson(productDAO.getSearchedProduct(query)));

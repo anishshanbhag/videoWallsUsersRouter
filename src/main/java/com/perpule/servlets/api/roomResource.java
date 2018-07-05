@@ -42,7 +42,7 @@ public class roomResource {
   @Consumes({MediaType.APPLICATION_JSON})
   public ResponseModel getRoom(
       SalesmanDatabaseModel salesmanDatabaseModel, @Context HttpHeaders httpheaders)
-      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+      throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -61,7 +61,7 @@ public class roomResource {
   @Produces({MediaType.APPLICATION_JSON})
   @Consumes({MediaType.APPLICATION_JSON})
   public ResponseModel checkWhetherSalesmanAllotted(RoomDatabaseModel roomDatabaseModel)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
         ResponseModel responseModel =
                 new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
         if (roomDAO.isSalesmanAllotted(roomDatabaseModel.getId())){

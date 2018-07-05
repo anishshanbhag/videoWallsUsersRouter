@@ -10,7 +10,7 @@ public class DeviceDAO {
 
   public DeviceResponseDatabaseModel createDevice(
       DeviceResponseDatabaseModel deviceResponseDatabaseModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
     deviceResponseDatabaseModel.setCreatedAt(createdAt);
     String id =
@@ -40,7 +40,7 @@ public class DeviceDAO {
   }
 
   public boolean deleteDevice(String id)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException {
     String sqlQuery = "DELETE FROM device WHERE id = '" + id + "'";
     if (DBManager.doQuery(sqlQuery)) {
       return true;

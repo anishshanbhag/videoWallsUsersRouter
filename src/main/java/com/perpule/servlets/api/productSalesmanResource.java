@@ -30,7 +30,7 @@ public class productSalesmanResource {
   public ResponseModel createProduct(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -53,7 +53,7 @@ public class productSalesmanResource {
   public ResponseModel removeSalesmanProduct(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -76,7 +76,7 @@ public class productSalesmanResource {
   public ResponseModel getProductIdSalesmanIdMappingList(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -100,7 +100,7 @@ public class productSalesmanResource {
   public ResponseModel getSalesmanProductDetailList(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel,
       @Context HttpHeaders httpheaders)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {

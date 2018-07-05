@@ -23,7 +23,7 @@ public class ConsumerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces(MediaType.APPLICATION_JSON)
   public ResponseModel createConsumer(ConsumerModel consumerModel)
-      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+      throws NoSuchAlgorithmException, SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     responseModel.setData(new Gson().toJson(consumerDAO.createConsumer(consumerModel)));

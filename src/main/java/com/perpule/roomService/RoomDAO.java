@@ -36,7 +36,7 @@ public class RoomDAO {
     }
   }
 
-  public int getAverageWaitingTime() throws SQLException, ClassNotFoundException {
+  public int getAverageWaitingTime() throws SQLException {
     String sqlQuery =
         "SELECT AVG(`waitingTime`) AS `averageWaitingTime` FROM (SELECT `startTime` - `requestedTime` AS `waitingTime` FROM `room`) AS waitingTimeTable";
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
@@ -53,7 +53,7 @@ public class RoomDAO {
   }
 
   public RoomDatabaseModel getEmptyRequestedRoom(String salesmanId)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     RoomDatabaseModel roomDatabaseModel = new RoomDatabaseModel();
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NULL";
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
@@ -84,7 +84,7 @@ public class RoomDAO {
     }
   }
 
-  public boolean isSalesmanAllotted(String roomId) throws SQLException, ClassNotFoundException {
+  public boolean isSalesmanAllotted(String roomId) throws SQLException {
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NOT NULL AND id = '" + roomId + "'";
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
     return resultSet.isBeforeFirst();

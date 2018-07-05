@@ -25,7 +25,7 @@ public class DeviceResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseModel registerNewDevice(DeviceResponseDatabaseModel deviceResponseDatabaseModel)
-      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+      throws NoSuchAlgorithmException, SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())) {
@@ -42,7 +42,7 @@ public class DeviceResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseModel deleteDevice(DeviceResponseDatabaseModel deviceResponseDatabaseModel)
-      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+      throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isSalesmanManager(deviceResponseDatabaseModel.getSalesmanId())) {

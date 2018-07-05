@@ -11,7 +11,7 @@ public class SalesmanDAO {
 
 
 
-    public SalesmanDatabaseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    public SalesmanDatabaseModel createSalesman(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, NoSuchAlgorithmException {
         String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
         String id = RandomAndHashStringUtil.getId(salesmanSignInSignUpRequestModel.getUserName(),createdAt);
         String userName = salesmanSignInSignUpRequestModel.getUserName();
@@ -43,7 +43,7 @@ public class SalesmanDAO {
         }
     }
 
-    public boolean isSalemanUserExists(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    public boolean isSalemanUserExists(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, NoSuchAlgorithmException {
         String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+salesmanSignInSignUpRequestModel.getUserName()+"'";
         ResultSet resultSet = DBManager.getResultset(sqlQuery);
         if (resultSet.isBeforeFirst()){
@@ -54,7 +54,7 @@ public class SalesmanDAO {
         }
     }
 
-    public SalesmanDatabaseModel getSalemanUserData(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    public SalesmanDatabaseModel getSalemanUserData(SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException {
         String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+salesmanSignInSignUpRequestModel.getUserName()+"'";
         String id = null;
         String userName = null;
@@ -95,36 +95,36 @@ public class SalesmanDAO {
         return salesmanDatabaseModel;
     }
 
-    public boolean isSalesmanUsernameExists(String userName) throws SQLException, ClassNotFoundException {
+    public boolean isSalesmanUsernameExists(String userName) throws SQLException {
         String sqlQuery = "SELECT * FROM salesman WHERE userName = '"+userName+"'";
     return DBManager.getResultset(sqlQuery).isBeforeFirst();
     }
 
-    public boolean isSalesmanManager(String salesmanId) throws SQLException, ClassNotFoundException {
+    public boolean isSalesmanManager(String salesmanId) throws SQLException {
         String sqlQuery = "SELECT * FROM salesman WHERE id = '"+salesmanId+"' AND role = 'manager'";
         return DBManager.getResultset(sqlQuery).isBeforeFirst();
     }
 
-    public boolean isAuthTokenExists(String authToken) throws SQLException, ClassNotFoundException {
+    public boolean isAuthTokenExists(String authToken) throws SQLException {
         String sqlQuery = "SELECT * FROM salesman WHERE authToken = '"+authToken+"'";
         return DBManager.getResultset(sqlQuery).isBeforeFirst();
     }
 
-    public boolean setActive(String authToken) throws SQLException, ClassNotFoundException {
+    public boolean setActive(String authToken) throws SQLException {
         String sqlQuery = "UPDATE salesman SET isActive = "+true+" WHERE authToken = '"+authToken+"'";
         return DBManager.doQuery(sqlQuery);
     }
 
-    public boolean unSetActive(String authToken) throws SQLException, ClassNotFoundException {
+    public boolean unSetActive(String authToken) throws SQLException {
         String sqlQuery = "UPDATE salesman SET isActive = "+false+" WHERE authToken = '"+authToken+"'";
         return DBManager.doQuery(sqlQuery);
     }
-    public boolean setOccupied(String authToken) throws SQLException, ClassNotFoundException {
+    public boolean setOccupied(String authToken) throws SQLException {
         String sqlQuery = "UPDATE salesman SET isOccupied = "+true+" WHERE authToken = '"+authToken+"'";
         return DBManager.doQuery(sqlQuery);
     }
 
-  public boolean unSetOccupied(String authToken) throws SQLException, ClassNotFoundException {
+  public boolean unSetOccupied(String authToken) throws SQLException {
         String sqlQuery = "UPDATE salesman SET isOccupied = "+false+" WHERE authToken = '"+authToken+"'";
         return DBManager.doQuery(sqlQuery);
     }

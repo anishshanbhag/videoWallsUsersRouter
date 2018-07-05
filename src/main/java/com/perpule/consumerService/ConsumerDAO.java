@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class ConsumerDAO {
 
   public ConsumerModel createConsumer(ConsumerModel consumerModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
     String id = RandomAndHashStringUtil.getId(consumerModel.getDeviceId(), createdAt);
     String name = consumerModel.getName();

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ProductDAO {
 
   public ProductDatabaseModel createProduct(ProductCreateRequestModel productCreateRequestModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
     String id =
         RandomAndHashStringUtil.getId(productCreateRequestModel.getProductName(), createdAt);
@@ -60,7 +60,7 @@ public class ProductDAO {
   }
 
   public ArrayList<ProductDatabaseModel> getSearchedProduct(String queryString)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     String sqlQuery =
         "SELECT * FROM product WHERE productStringTags LIKE '%" + queryString + "%' LIMIT 100";
     ArrayList<ProductDatabaseModel> list = new ArrayList<>();

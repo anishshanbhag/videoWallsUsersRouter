@@ -7,7 +7,7 @@ import java.sql.*;
 public class DBManager {
   private static Connection connection;
 
-  private static Connection getConnection() throws ClassNotFoundException, SQLException {
+  private static Connection getConnection() throws SQLException {
     if (connection == null) {
       connection =
           DriverManager.getConnection(
@@ -18,14 +18,14 @@ public class DBManager {
     }
   }
 
-  public static boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
+  public static boolean doQuery(String sqlQuery) throws SQLException {
     PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
     preparedStatement.executeUpdate();
     return true;
   }
 
   public static ResultSet getResultset(String sqlQuery)
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     Statement statement = getConnection().createStatement();
     return statement.executeQuery(sqlQuery);
   }
