@@ -26,4 +26,8 @@ public class DBConstant {
       return "";
     }
   }
+
+  public static String getDBDriver() {
+    return "com.mysql.cj.jdbc.Driver";
+  }
 }

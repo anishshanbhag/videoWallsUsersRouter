@@ -1,27 +1,13 @@
 package com.perpule.roomService;
 
-import com.perpule.singletons.DBConnectionSingleton;
+import com.perpule.singletons.DBManager;
 import com.perpule.utils.RandomAndHashStringUtil;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class RoomDAO {
-
-  private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
-    PreparedStatement preparedStatement =
-        DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);
-    preparedStatement.executeUpdate();
-    return true;
-  }
-
-  private ResultSet getResultset(String sqlQuery) throws SQLException, ClassNotFoundException {
-    Statement statement = DBConnectionSingleton.getInstance().getConnection().createStatement();
-    return statement.executeQuery(sqlQuery);
-  }
 
   public RoomDatabaseModel createRoom(RoomDatabaseModel roomDatabaseModel)
       throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
@@ -43,7 +29,7 @@ public class RoomDAO {
             + "' , NULL , '"
             + averageWaitingTime
             + "', NULL , NULL )";
-    if (doQuery(sqlQuery)) {
+    if (DBManager.doQuery(sqlQuery)) {
       return roomDatabaseModel;
     } else {
       throw new Error("doQuery function not working!");
@@ -53,7 +39,7 @@ public class RoomDAO {
   public int getAverageWaitingTime() throws SQLException, ClassNotFoundException {
     String sqlQuery =
         "SELECT AVG(`waitingTime`) AS `averageWaitingTime` FROM (SELECT `startTime` - `requestedTime` AS `waitingTime` FROM `room`) AS waitingTimeTable";
-    ResultSet resultSet = getResultset(sqlQuery);
+    ResultSet resultSet = DBManager.getResultset(sqlQuery);
     if (resultSet.isBeforeFirst()) {
       resultSet.next();
       if (resultSet.getInt("averageWaitingTime") == 0) {
@@ -70,12 +56,12 @@ public class RoomDAO {
       throws SQLException, ClassNotFoundException {
     RoomDatabaseModel roomDatabaseModel = new RoomDatabaseModel();
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NULL";
-    ResultSet resultSet = getResultset(sqlQuery);
+    ResultSet resultSet = DBManager.getResultset(sqlQuery);
     if (resultSet.isBeforeFirst()) {
       resultSet.next();
       sqlQuery = "UPDATE `salesman` SET isOccupied = TRUE WHERE id = '" + salesmanId + "'";
       String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
-      if (doQuery(sqlQuery)) {
+      if (DBManager.doQuery(sqlQuery)) {
         sqlQuery =
             "UPDATE `room` SET salesmanId = '"
                 + salesmanId
@@ -84,7 +70,7 @@ public class RoomDAO {
                 + " WHERE id = '"
                 + resultSet.getString("id")
                 + "'";
-        if (doQuery(sqlQuery)) {
+        if (DBManager.doQuery(sqlQuery)) {
           roomDatabaseModel.setId(resultSet.getString("id"));
           return roomDatabaseModel;
         } else {
@@ -100,7 +86,7 @@ public class RoomDAO {
 
   public boolean isSalesmanAllotted(String roomId) throws SQLException, ClassNotFoundException {
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NOT NULL AND id = '" + roomId + "'";
-    ResultSet resultSet = getResultset(sqlQuery);
+    ResultSet resultSet = DBManager.getResultset(sqlQuery);
     return resultSet.isBeforeFirst();
   }
 }

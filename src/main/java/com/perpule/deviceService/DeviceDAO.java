@@ -1,27 +1,12 @@
 package com.perpule.deviceService;
 
-import com.perpule.singletons.DBConnectionSingleton;
+import com.perpule.singletons.DBManager;
 import com.perpule.utils.RandomAndHashStringUtil;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DeviceDAO {
-
-  private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
-    PreparedStatement preparedStatement =
-        DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);
-    preparedStatement.executeUpdate();
-    return true;
-  }
-
-  private ResultSet getResultset(String sqlQuery) throws SQLException, ClassNotFoundException {
-    Statement statement = DBConnectionSingleton.getInstance().getConnection().createStatement();
-    return statement.executeQuery(sqlQuery);
-  }
 
   public DeviceResponseDatabaseModel createDevice(
       DeviceResponseDatabaseModel deviceResponseDatabaseModel)
@@ -47,7 +32,7 @@ public class DeviceDAO {
             + "' , '"
             + salesmanId
             + "')";
-    if (doQuery(sqlQuery)) {
+    if (DBManager.doQuery(sqlQuery)) {
       return deviceResponseDatabaseModel;
     } else {
       throw new Error("doQuery function not working!");
@@ -57,7 +42,7 @@ public class DeviceDAO {
   public boolean deleteDevice(String id)
       throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
     String sqlQuery = "DELETE FROM device WHERE id = '" + id + "'";
-    if (doQuery(sqlQuery)) {
+    if (DBManager.doQuery(sqlQuery)) {
       return true;
     } else {
       throw new Error("doQuery function not working!");

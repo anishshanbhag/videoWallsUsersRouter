@@ -1,30 +1,16 @@
 package com.perpule.productSalesmanService;
 
 import com.perpule.productService.ProductDatabaseModel;
-import com.perpule.singletons.DBConnectionSingleton;
+import com.perpule.singletons.DBManager;
 import com.perpule.utils.RandomAndHashStringUtil;
 import org.apache.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductSalesmanDAO {
-
-  private boolean doQuery(String sqlQuery) throws SQLException, ClassNotFoundException {
-    PreparedStatement preparedStatement =
-        DBConnectionSingleton.getInstance().getConnection().prepareStatement(sqlQuery);
-    preparedStatement.executeUpdate();
-    return true;
-  }
-
-  private ResultSet getResultset(String sqlQuery) throws SQLException, ClassNotFoundException {
-    Statement statement = DBConnectionSingleton.getInstance().getConnection().createStatement();
-    return statement.executeQuery(sqlQuery);
-  }
 
   public boolean createSalesmanProduct(
       ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel)
@@ -41,7 +27,7 @@ public class ProductSalesmanDAO {
             + "' , '"
             + productSalesmanDatabaseRequestModel.getProductId()
             + "' )";
-    if (doQuery(sqlQuery)) {
+    if (DBManager.doQuery(sqlQuery)) {
       return true;
     } else {
       throw new Error("doQuery function not working!");
@@ -57,7 +43,7 @@ public class ProductSalesmanDAO {
             + "' AND productId = '"
             + productSalesmanDatabaseRequestModel.getProductId()
             + "'";
-    if (doQuery(sqlQuery)) {
+    if (DBManager.doQuery(sqlQuery)) {
       return true;
     } else {
       throw new Error("doQuery function not working!");
@@ -73,7 +59,7 @@ public class ProductSalesmanDAO {
         "SELECT * FROM productSalesman WHERE salesmanId = '"
             + productSalesmanDatabaseRequestModel.getSalesmanId()
             + "'";
-    ResultSet resultSet = getResultset(sqlQuery);
+    ResultSet resultSet = DBManager.getResultset(sqlQuery);
     if (resultSet.isBeforeFirst()) {
       while (resultSet.next()) {
         ProductSalesmanDatabaseRequestModel productSalesmanDatabaseRequestModel1 =
@@ -103,7 +89,7 @@ public class ProductSalesmanDAO {
     }
     sqlQuery.append(")");
     Logger.getLogger(getClass()).info(sqlQuery);
-    ResultSet resultSet = getResultset(sqlQuery.toString());
+    ResultSet resultSet = DBManager.getResultset(sqlQuery.toString());
     if (resultSet.isBeforeFirst()) {
       while (resultSet.next()) {
         ProductDatabaseModel productDatabaseModel =
