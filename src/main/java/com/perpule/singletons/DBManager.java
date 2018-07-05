@@ -24,9 +24,13 @@ public class DBManager {
     return true;
   }
 
-  public static ResultSet getResultset(String sqlQuery)
-      throws SQLException {
+  public static ResultSet getResultset(String sqlQuery) throws SQLException {
     Statement statement = getConnection().createStatement();
     return statement.executeQuery(sqlQuery);
+  }
+
+  public static int update(String sqlQuery) throws SQLException {
+    Statement statement = getConnection().createStatement();
+    return statement.executeUpdate(sqlQuery);
   }
 }

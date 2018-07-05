@@ -13,4 +13,8 @@ public class ResponseCodeConstant {
   public static final int NOT_A_MANAGER = 108406;
   public static final int SALESMAN_ALLOTTTED_IN_THE_ROOM = 108203;
   public static final int SALESMAN_STILL_NOT_ALLOTTTED_IN_THE_ROOM = 108407;
+  public static final int ELEMENT_UPDATED_OR_DELETED = 108204;
+  public static final int NO_ELEMENT_UPDATED_OR_DELETED = 108408;
+  public static final int SALESMAN_IS_ACTIVE = 108205;
+  public static final int SALESMAN_IS_NOT_ACTIVE = 108206;
 }

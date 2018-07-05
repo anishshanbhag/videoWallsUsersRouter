@@ -46,8 +46,7 @@ public class SalesmanResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces(MediaType.APPLICATION_JSON)
   public ResponseModel checkSalesmanUserNameExist(
-      SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel)
-      throws SQLException {
+      SalesmanSignInSignUpRequestModel salesmanSignInSignUpRequestModel) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isSalesmanUsernameExists(salesmanSignInSignUpRequestModel.getUserName())) {
@@ -81,8 +80,7 @@ public class SalesmanResource {
   @Path("checkAuthToken")
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel checkAuthToken(@Context HttpHeaders httpheaders)
-      throws SQLException {
+  public ResponseModel checkAuthToken(@Context HttpHeaders httpheaders) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -97,8 +95,7 @@ public class SalesmanResource {
   @Path("setActive")
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel setActive(@Context HttpHeaders httpheaders)
-      throws SQLException {
+  public ResponseModel setActive(@Context HttpHeaders httpheaders) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -116,8 +113,7 @@ public class SalesmanResource {
   @Path("unSetActive")
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel unsetActive(@Context HttpHeaders httpheaders)
-      throws SQLException {
+  public ResponseModel unsetActive(@Context HttpHeaders httpheaders) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -135,8 +131,7 @@ public class SalesmanResource {
   @Path("setOccupied")
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel setOccupied(@Context HttpHeaders httpheaders)
-      throws SQLException {
+  public ResponseModel setOccupied(@Context HttpHeaders httpheaders) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -154,8 +149,7 @@ public class SalesmanResource {
   @Path("unSetOccupied")
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public ResponseModel unsetOccupied(@Context HttpHeaders httpheaders)
-      throws SQLException {
+  public ResponseModel unsetOccupied(@Context HttpHeaders httpheaders) throws SQLException {
     ResponseModel responseModel =
         new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
     if (salesmanDAO.isAuthTokenExists(httpheaders.getHeaderString("authToken"))) {
@@ -166,6 +160,20 @@ public class SalesmanResource {
     } else {
       responseModel.setResponse(
           String.valueOf(ResponseCodeConstant.AUTH_TOKEN_NOT_FOUND_OR_NOT_MATCHED));
+    }
+    return responseModel;
+  }
+
+  @Path("checkIfActive")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public ResponseModel checkIfActive(@Context HttpHeaders httpheaders) throws SQLException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (salesmanDAO.isActive(httpheaders.getHeaderString("authToken"))) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_IS_ACTIVE));
+    } else {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_IS_NOT_ACTIVE));
     }
     return responseModel;
   }

@@ -62,13 +62,30 @@ public class roomResource {
   @Consumes({MediaType.APPLICATION_JSON})
   public ResponseModel checkWhetherSalesmanAllotted(RoomDatabaseModel roomDatabaseModel)
       throws SQLException {
-        ResponseModel responseModel =
-                new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
-        if (roomDAO.isSalesmanAllotted(roomDatabaseModel.getId())){
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_ALLOTTTED_IN_THE_ROOM));
-        }else{
-            responseModel.setResponse(String.valueOf(ResponseCodeConstant.SALESMAN_STILL_NOT_ALLOTTTED_IN_THE_ROOM));
-        }
-        return responseModel;
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (roomDAO.isSalesmanAllotted(roomDatabaseModel.getId())) {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.SALESMAN_ALLOTTTED_IN_THE_ROOM));
+    } else {
+      responseModel.setResponse(
+          String.valueOf(ResponseCodeConstant.SALESMAN_STILL_NOT_ALLOTTTED_IN_THE_ROOM));
     }
+    return responseModel;
+  }
+
+  @POST
+  @Path("deleteRoom")
+  @Produces({MediaType.APPLICATION_JSON})
+  @Consumes({MediaType.APPLICATION_JSON})
+  public ResponseModel deleteRoom(RoomDatabaseModel roomDatabaseModel) throws SQLException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    if (roomDAO.deleteRoom(roomDatabaseModel.getId())) {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.ELEMENT_UPDATED_OR_DELETED));
+    } else {
+      responseModel.setResponse(String.valueOf(ResponseCodeConstant.NO_ELEMENT_UPDATED_OR_DELETED));
+    }
+    return responseModel;
+  }
 }

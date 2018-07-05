@@ -52,8 +52,7 @@ public class RoomDAO {
     }
   }
 
-  public RoomDatabaseModel getEmptyRequestedRoom(String salesmanId)
-      throws SQLException {
+  public RoomDatabaseModel getEmptyRequestedRoom(String salesmanId) throws SQLException {
     RoomDatabaseModel roomDatabaseModel = new RoomDatabaseModel();
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NULL";
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
@@ -88,5 +87,10 @@ public class RoomDAO {
     String sqlQuery = "SELECT * FROM `room` WHERE salesmanId IS NOT NULL AND id = '" + roomId + "'";
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
     return resultSet.isBeforeFirst();
+  }
+
+  public boolean deleteRoom(String roomId) throws SQLException {
+    String sqlQuery = "DELETE FROM `room` WHERE salesmanId IS NULL AND id = '" + roomId + "'";
+    return DBManager.update(sqlQuery) > 0;
   }
 }
