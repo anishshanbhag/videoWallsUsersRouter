@@ -36,6 +36,23 @@ public class RoomDAO {
     }
   }
 
+  public RoomDatabaseModel ifRequestedRoomAlreadyThereForThisDevice(
+      RoomDatabaseModel roomDatabaseModel) throws SQLException {
+
+    String sqlQuery =
+        "SELECT * FROM `room` WHERE salesmanId IS NULL AND deviceId = '"
+            + roomDatabaseModel.getDeviceId()
+            + "'";
+    ResultSet resultSet = DBManager.getResultset(sqlQuery);
+    if (resultSet.isBeforeFirst()) {
+      resultSet.next();
+      roomDatabaseModel.setId(resultSet.getString("id"));
+      roomDatabaseModel.setAverageWaitingTime(
+          Integer.parseInt(resultSet.getString("averageWaitingTime")));
+    }
+    return roomDatabaseModel;
+  }
+
   public int getAverageWaitingTime() throws SQLException {
     String sqlQuery =
         "SELECT AVG(`waitingTime`) AS `averageWaitingTime` FROM (SELECT `startTime` - `requestedTime` AS `waitingTime` FROM `room`) AS waitingTimeTable";
