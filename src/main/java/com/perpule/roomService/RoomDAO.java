@@ -10,19 +10,25 @@ import java.sql.SQLException;
 public class RoomDAO {
 
   public RoomDatabaseModel createRoom(RoomDatabaseModel roomDatabaseModel)
-      throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+      throws SQLException, NoSuchAlgorithmException {
     String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
     String requestedTime = createdAt;
     roomDatabaseModel.setRequestedTime(Integer.parseInt(requestedTime));
     String deviceId = roomDatabaseModel.getDeviceId();
     String id = RandomAndHashStringUtil.getId(deviceId, createdAt);
     String averageWaitingTime = String.valueOf(getAverageWaitingTime());
+    String consumerId = "NULL";
     roomDatabaseModel.setId(id);
     roomDatabaseModel.setAverageWaitingTime(Integer.parseInt(averageWaitingTime));
+    if (roomDatabaseModel.getConsumerId() != null) {
+      consumerId = "'" + roomDatabaseModel.getConsumerId() + "'";
+    }
     String sqlQuery =
         "INSERT INTO `room` (`id`, `consumerId`, `deviceId`, `requestedTime`, `startTime`, `averageWaitingTime`, `endTime`, `salesmanId`) VALUES ( '"
             + id
-            + "' , NULL , '"
+            + "' , "
+            + consumerId
+            + " , '"
             + deviceId
             + "' , '"
             + requestedTime

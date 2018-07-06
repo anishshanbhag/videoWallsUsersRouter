@@ -12,6 +12,7 @@ public class ConsumerDAO {
       throws SQLException, NoSuchAlgorithmException {
     String createdAt = String.valueOf(System.currentTimeMillis() / 1000L);
     String id = RandomAndHashStringUtil.getId(consumerModel.getDeviceId(), createdAt);
+    consumerModel.setId(id);
     String name = consumerModel.getName();
     String phoneNumber = consumerModel.getPhoneNumber();
     String deviceId = consumerModel.getDeviceId();
