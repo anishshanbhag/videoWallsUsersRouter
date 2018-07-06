@@ -1,7 +1,7 @@
 :boom: :boom: Video Walls Users Router :boom: :boom:
 =
 
-This opensource project will help people to seamlessly connect salesmans/designers to consumers 
+This project will help people to seamlessly connect salesmans/designers to consumers 
 * [Download jetty-runner](https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-runner) and copy it to same folder
 
 * Install Gradle first
