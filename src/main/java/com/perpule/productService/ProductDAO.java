@@ -21,9 +21,8 @@ public class ProductDAO {
     String productStringTags =
         RandomAndHashStringUtil.getProductStringTags(
             productName + " " + productDetails + " " + productCategory);
-    int totalRatings = 0;
-    int totalUsersRated = 0;
-    int totalHits = 0;
+    int productMRP = productCreateRequestModel.getProductMRP();
+    int productSellingPrice = productCreateRequestModel.getProductSellingPrice();
     ProductDatabaseModel productDatabaseModel =
         new ProductDatabaseModel(
             id,
@@ -31,11 +30,11 @@ public class ProductDAO {
             productDetails,
             productCategory,
             productStringTags,
-            totalRatings,
-            totalUsersRated,
-            totalHits);
+            productMRP,
+            productSellingPrice
+            );
     String sqlQuery =
-        "INSERT INTO product (id , productName , productDetails , productCategory , productStringTags , totalRatings , totalUsersRated , totalHits) VALUES ( '"
+        "INSERT INTO product (id , productName , productDetails , productCategory , productStringTags , productMRP , productSellingPrice ) VALUES ( '"
             + id
             + "' , '"
             + productName
@@ -46,11 +45,9 @@ public class ProductDAO {
             + "' , '"
             + productStringTags
             + "' , "
-            + totalRatings
+            + productMRP
             + " , "
-            + totalUsersRated
-            + " , "
-            + totalHits
+            + productSellingPrice
             + ")";
     if (DBManager.doQuery(sqlQuery)) {
       return productDatabaseModel;
@@ -71,9 +68,8 @@ public class ProductDAO {
       String productDetails = resultSet.getString("productDetails");
       String productCategory = resultSet.getString("productCategory");
       String productStringTags = resultSet.getString("productStringTags");
-      int totalRatings = resultSet.getInt("totalRatings");
-      int totalUsersRated = resultSet.getInt("totalUsersRated");
-      int totalHits = resultSet.getInt("totalHits");
+      int productMRP = resultSet.getInt("productMRP");
+      int productSellingPrice = resultSet.getInt("productSellingPrice");
       ProductDatabaseModel productDatabaseModel =
           new ProductDatabaseModel(
               id,
@@ -81,9 +77,9 @@ public class ProductDAO {
               productDetails,
               productCategory,
               productStringTags,
-              totalRatings,
-              totalUsersRated,
-              totalHits);
+              productMRP,
+              productSellingPrice
+              );
       list.add(productDatabaseModel);
     }
     return list;

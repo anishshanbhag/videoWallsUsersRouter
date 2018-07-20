@@ -4,14 +4,18 @@ public class ProductCreateRequestModel {
   private String productName;
   private String productDetails;
   private String productCategory;
+  private int productMRP ;
+  private int productSellingPrice;
 
   public ProductCreateRequestModel() {}
 
   public ProductCreateRequestModel(
-      String productName, String productDetails, String productCategory) {
+      String productName, String productDetails, String productCategory,int productMRP ,int productSellingPrice) {
     this.productName = productName;
     this.productDetails = productDetails;
     this.productCategory = productCategory;
+    this.productMRP = productMRP;
+    this.productSellingPrice = productSellingPrice;
   }
 
   public String getProductName() {
@@ -36,5 +40,20 @@ public class ProductCreateRequestModel {
 
   public void setProductCategory(String productCategory) {
     this.productCategory = productCategory;
+  }
+  public int getProductMRP() {
+    return productMRP;
+  }
+
+  public void setProductMRP(int productMRP) {
+    this.productMRP = productMRP;
+  }
+
+  public int getProductSellingPrice() {
+    return productSellingPrice;
+  }
+
+  public void setProductSellingPrice(int productSellingPrice) {
+    this.productSellingPrice = productSellingPrice;
   }
 }

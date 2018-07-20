@@ -33,7 +33,9 @@ CREATE TABLE `consumer` (
   `name` varchar(63) NOT NULL,
   `phoneNumber` varchar(63) NOT NULL,
   `createdAt` int(11) NOT NULL,
-  `deviceId` varchar(63) NOT NULL
+  `deviceId` varchar(63) NOT NULL,
+  `productId` varchar(63) NOT NULL,
+  `productName` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -114,6 +116,19 @@ CREATE TABLE `salesman` (
   `lastSignedIn` int(11) NOT NULL,
   `authToken` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` varchar(63) NOT NULL,
+  `technicalKnowledge` varchar(63) NOT NULL,
+  `communicationSkill` varchar(63) NOT NULL,
+  `conveyIdeas` varchar(63) NOT NULL,
+  `trustFactor` varchar(63) NOT NULL,
+  `satisfactionFactor` varchar(63) NOT NULL
+)
 
 --
 -- Indexes for dumped tables

@@ -16,17 +16,23 @@ public class ConsumerDAO {
     String name = consumerModel.getName();
     String phoneNumber = consumerModel.getPhoneNumber();
     String deviceId = consumerModel.getDeviceId();
+    String productId = consumerModel.getProductId();
+    String productName = consumerModel.getProductName();
     String sqlQuery =
-        "INSERT INTO consumer (id , name , phoneNumber, createdAt, deviceId ) VALUES ( '"
+        "INSERT INTO consumer (id , name , phoneNumber, createdAt, deviceId, productId, productName) VALUES ( '"
             + id
             + "' , '"
             + name
-            + "' , "
+            + "' , '"
             + phoneNumber
-            + " , "
+            + "' , '"
             + createdAt
-            + " , '"
+            + "' , '"
             + deviceId
+            + "' , '"
+            + productId
+            + "' , '"
+            + productName
             + "')";
     if (DBManager.doQuery(sqlQuery)) {
       return consumerModel;

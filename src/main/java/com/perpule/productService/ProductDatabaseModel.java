@@ -6,9 +6,8 @@ public class ProductDatabaseModel {
   private String productDetails;
   private String productCategory;
   private String productStringTags;
-  private float totalRatings;
-  private int totalUsersRated;
-  private int totalHits;
+  private int productMRP ;
+  private int productSellingPrice;
 
   public ProductDatabaseModel() {}
 
@@ -18,17 +17,16 @@ public class ProductDatabaseModel {
       String productDetails,
       String productCategory,
       String productStringTags,
-      float totalRatings,
-      int totalUsersRated,
-      int totalHits) {
+      int productMRP,
+      int productSellingPrice
+      ) {
     this.id = id;
     this.productName = productName;
     this.productDetails = productDetails;
     this.productCategory = productCategory;
     this.productStringTags = productStringTags;
-    this.totalRatings = totalRatings;
-    this.totalUsersRated = totalUsersRated;
-    this.totalHits = totalHits;
+    this.productMRP = productMRP;
+    this.productSellingPrice = productSellingPrice;
   }
 
   public String getId() {
@@ -71,27 +69,20 @@ public class ProductDatabaseModel {
     this.productStringTags = productStringTags;
   }
 
-  public float getTotalRatings() {
-    return totalRatings;
+  public int getProductMRP() {
+    return productMRP;
   }
 
-  public void setTotalRatings(float totalRatings) {
-    this.totalRatings = totalRatings;
+  public void setProductMRP(int productMRP) {
+    this.productMRP = productMRP;
   }
 
-  public int getTotalUsersRated() {
-    return totalUsersRated;
+  public int getProductSellingPrice() {
+    return productSellingPrice;
   }
 
-  public void setTotalUsersRated(int totalUsersRated) {
-    this.totalUsersRated = totalUsersRated;
+  public void setProductSellingPrice(int productSellingPrice) {
+    this.productSellingPrice = productSellingPrice;
   }
 
-  public int getTotalHits() {
-    return totalHits;
-  }
-
-  public void setTotalHits(int totalHits) {
-    this.totalHits = totalHits;
-  }
 }
