@@ -10,13 +10,26 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.MediaType;
+
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 @Path("feedback")
-public class FeedbackResource {
+public class FeedbackResource implements ContainerResponseFilter{
   private FeedbackDAO feedbackDAO = new FeedbackDAO();
+  
+  @Override
+	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+		response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+		response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+	}
 
   @Path("giveFeedback")
   @POST
