@@ -24,18 +24,10 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 @Path("room")
-public class roomResource implements ContainerResponseFilter{
+public class roomResource {
   private RoomDAO roomDAO = new RoomDAO();
   private SalesmanDAO salesmanDAO = new SalesmanDAO();
 
-  @Override
-	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
-		response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-		response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-		response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-	}
-  
   @POST
   @Path("createRoom")
   @Produces({MediaType.APPLICATION_JSON})

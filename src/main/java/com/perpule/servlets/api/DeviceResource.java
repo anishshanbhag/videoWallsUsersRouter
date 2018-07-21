@@ -21,17 +21,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 @Path("device")
-public class DeviceResource implements ContainerResponseFilter{
+public class DeviceResource{
   private DeviceDAO deviceDAO = new DeviceDAO();
   private SalesmanDAO salesmanDAO = new SalesmanDAO();
-  
-  @Override
-	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
-		response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-		response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-		response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-	}
 
   @Path("registerDevice")
   @POST

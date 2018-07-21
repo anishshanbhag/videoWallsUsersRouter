@@ -20,18 +20,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 @Path("consumer")
-public class ConsumerResource implements ContainerResponseFilter{
+public class ConsumerResource {
   private ConsumerDAO consumerDAO = new ConsumerDAO();
   
-  @Override
-	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
-		response.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-		response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-		response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-	}
-
-
   @Path("createConsumer")
   @POST
   @Consumes({MediaType.APPLICATION_JSON})
