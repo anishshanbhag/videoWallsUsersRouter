@@ -40,6 +40,19 @@ public class roomResource {
     responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
     return responseModel;
   }
+  
+  @POST
+  @Path("updateendtime")
+  @Produces({MediaType.APPLICATION_JSON})
+  @Consumes({MediaType.APPLICATION_JSON})
+  public ResponseModel editRoom(RoomDatabaseModel roomDatabaseModel)
+      throws NoSuchAlgorithmException, SQLException, ClassNotFoundException {
+    ResponseModel responseModel =
+        new ResponseModel(String.valueOf(ResponseCodeConstant.SOMETHING_IS_WRONG), null);
+    responseModel.setData(new Gson().toJson(roomDAO.updateEndTimeOfRoom(roomDatabaseModel)));
+    responseModel.setResponse(String.valueOf(ResponseCodeConstant.EVERYTHING_IS_OK));
+    return responseModel;
+  }
 
   @POST
   @Path("ifRequestedRoomAlreadyThereForThisDevice")
