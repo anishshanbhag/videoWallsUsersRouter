@@ -1,11 +1,14 @@
 package com.perpule.roomService;
 
+import com.perpule.models.CallDetailsModel;
 import com.perpule.singletons.DBManager;
 import com.perpule.utils.RandomAndHashStringUtil;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoomDAO {
 
@@ -100,6 +103,26 @@ public class RoomDAO {
 		} else {
 			return roomDatabaseModel;
 		}
+	}
+	
+	public List<CallDetailsModel> getCallDetails() throws SQLException {
+		List<CallDetailsModel> callDetailsModelList = new ArrayList<CallDetailsModel>();
+		String reportQuery = "select b.name as Customer,b.phoneNumber CustomerMobileNumber,b.productName as ProductSearchedFor,c.userName as SalesMan,"
+				+ " from_unixtime(startTime) as StartTime,from_unixtime(endTime) as EndTime,(endTime - startTime)  as Duration from room a "
+				+ " inner join consumer b on (a.consumerId=b.id) inner join salesman c on (a.salesmanId = c.id)";
+		ResultSet resultSet = DBManager.getResultset(reportQuery);
+		while (resultSet.next()) {
+			CallDetailsModel callDetailsModel = new CallDetailsModel();
+			callDetailsModel.setCustomerName(resultSet.getString("Customer"));
+			callDetailsModel.setCustomerPhoneNumber(resultSet.getString("CustomerMobileNumber"));
+			callDetailsModel.setProductSearchedFor(resultSet.getString("ProductSearchedFor"));
+			callDetailsModel.setSalesman(resultSet.getString("SalesMan"));
+			callDetailsModel.setStartTime(resultSet.getString("StartTime"));
+			callDetailsModel.setEndTime(resultSet.getString("EndTime"));
+			callDetailsModel.setDuration(resultSet.getString("Duration"));
+			callDetailsModelList.add(callDetailsModel);
+		}
+		return callDetailsModelList;
 	}
 
 	public boolean isSalesmanAllotted(String roomId) throws SQLException {

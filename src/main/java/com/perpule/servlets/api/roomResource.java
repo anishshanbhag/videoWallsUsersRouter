@@ -2,6 +2,7 @@ package com.perpule.servlets.api;
 
 import com.google.gson.Gson;
 import com.perpule.constants.ResponseCodeConstant;
+import com.perpule.models.CallDetailsModel;
 import com.perpule.models.ResponseModel;
 import com.perpule.roomService.RoomDAO;
 import com.perpule.roomService.RoomDatabaseModel;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("room")
 public class roomResource {
@@ -119,5 +121,12 @@ public class roomResource {
       responseModel.setResponse(String.valueOf(ResponseCodeConstant.NO_ELEMENT_UPDATED_OR_DELETED));
     }
     return responseModel;
+  }
+  
+  @GET
+  @Path("getCallDetails")
+  @Produces({MediaType.APPLICATION_JSON})
+  public List<CallDetailsModel> getCallDetails(){
+	  return roomDAO.getCallDetails();
   }
 }
