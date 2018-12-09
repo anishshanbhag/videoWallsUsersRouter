@@ -59,7 +59,7 @@ public class ProductDAO {
   public ArrayList<ProductDatabaseModel> getSearchedProduct(String queryString)
       throws SQLException {
     String sqlQuery =
-        "SELECT * FROM product WHERE productStringTags LIKE '%" + queryString + "%' LIMIT 100";
+        "SELECT * FROM product WHERE productName LIKE '%" + queryString + "%' LIMIT 100";
     ArrayList<ProductDatabaseModel> list = new ArrayList<>();
     ResultSet resultSet = DBManager.getResultset(sqlQuery);
     while (resultSet.next()) {
